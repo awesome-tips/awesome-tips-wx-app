@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/search/search"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "知识小集",
+    "navigationBarBackgroundColor": "#f0f0f0",
+    "backgroundColor": "#f0f0f0"
+  }
+}

@@ -1,0 +1,75 @@
+@import '/towxml/style/main.wxss';
+@import '/towxml/style/theme/light.wxss';
+
+.hidePage {
+  display: none
+}
+
+.tip-content-hide {
+  display: none
+}
+
+.tip-content-view {
+  background-color: #FFFFFF;
+  height: 100%;
+}
+
+.h2w__title {
+  margin:0 30rpx;
+  padding-top:30rpx;
+}
+
+.tip-title-view {
+  font-weight:bold;
+  border-bottom-style:double;
+  border-bottom-width:6rpx;
+  font-size:42rpx;
+  padding-bottom:10rpx;
+  border-color:#eee;
+}
+
+.tip-date-auther-view {
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+  font-size:30rpx;
+  color: #AFAFAF;
+}
+
+.tip-bottom-view {
+  background-color: #F8F8F8;
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  opacity: 0.95;
+  border-top-style:solid;
+  border-top-width:1rpx;
+  border-color: #DBDBDB;
+}
+
+.tip-bottom-btn-view {
+  width: 50%;
+  height: 100%;
+  color: #ABABAB;
+  font-size:16px;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  padding-top: 30rpx;
+  line-height: 40rpx;
+}
+
+.tip-btn-left {
+  float: left;
+}
+
+.tip-btn-right {
+  float: right;
+}
+
+button::after {
+  border: none;
+}

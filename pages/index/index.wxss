@@ -1,0 +1,12 @@
+@import "../../utils/common.wxss";
+
+.index-search-image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.index-tips-text {
+  color: #bfbfbf;
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}

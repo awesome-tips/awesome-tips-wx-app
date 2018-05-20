@@ -1,0 +1,20 @@
+page {
+  background-color: #f0f0f0;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.5;
+}
+
+.hide {
+  display: none
+}
+
+.container {
+  display: flex;
+  min-height: 100%;
+  font-size: 32rpx;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}

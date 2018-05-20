@@ -1,0 +1,13 @@
+@import "../../utils/common.wxss";
+
+.search-input {
+  height: 2.59em;
+  min-height: 2.59em;
+  line-height: 2.59em;
+  border: .5px solid rgba(13,25,40,0.25);
+  box-shadow: 0 4px 10px 0 rgba(44,57,75,0.1);
+  border-radius: 6rpx;
+  font-size: 28rpx;
+  text-align: left;
+  padding: 0 20rpx;
+}

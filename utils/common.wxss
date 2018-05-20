@@ -1,0 +1,55 @@
+.page-head {
+  padding: 30rpx;
+  text-align: center;
+}
+
+.page-body {
+  padding: 0 30rpx 30rpx;
+}
+
+.feed-list {
+  display: block;
+}
+
+.feed-list-item {
+  margin: 30rpx 0;
+  background-color: #fffefc;
+  border-radius: 6rpx;
+  overflow: hidden;
+  border: .5px solid rgba(13,25,40,0.25);
+  box-shadow: 0 4px 10px 0 rgba(44,57,75,0.1);
+}
+.feed-list-item:first-child {
+  margin-top: 0;
+}
+.feed-list-item.item-hover {
+    box-shadow: 0 1px 3px 0 rgba(44,57,75,0.15);
+    transform: scale(.95);
+    transition: all 200ms;
+}
+
+.feed-list-item-title-area {
+  padding: 30rpx 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+}
+
+.feed-list-item-date-author-area {
+  padding: 10rpx 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+  background-color: #f9f9f9;
+}
+
+.feed-list-item-title-text {
+  flex: 1;
+  color: #515151;
+  font-size: 32rpx;
+}
+.feed-list-item-sm-text {
+  flex: 1;
+  color: #bfbfbf;
+  font-size: 22rpx;
+}

@@ -1,0 +1,20 @@
+<view>
+  <view class="page-head">
+    <image class="index-search-image" src="../../assets/search.png" bindtap="searchBtnClick"></image>
+    <view class="index-tips-text">{{tipsText}}</view>
+  </view>
+  <view class="page-body">
+    <view class="feed-list">
+      <block wx:for-items="{{feedList}}" wx:key="{{item.fid}}">
+        <view id="{{item.fid}}" class="feed-list-item" hover-class="item-hover" data-feed="{{item}}" bindtap="feedItemClick">
+          <view class="feed-list-item-title-area">
+            <view class="feed-list-item-title-text">{{item.title}}</view>
+          </view>
+          <view class="feed-list-item-date-author-area">
+            <view class="feed-list-item-sm-text">{{item.postdate}} @{{item.author}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
