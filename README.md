@@ -4,4 +4,4 @@
 
 * Markdown & HTML 渲染参考：**[towxml](https://github.com/sbfkcel/towxml)**，在此感谢原[作者](https://github.com/sbfkcel)！
 
-![](https://file.kangzubin.com/iostips/gh_750869ac5e55_344.jpg)
+![AwesomeTips Sceenshots](https://file.kangzubin.com/iostips/WXApp-Screenshots.jpg)
