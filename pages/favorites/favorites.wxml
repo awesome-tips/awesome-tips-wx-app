@@ -1,9 +1,5 @@
 <import src="/utils/template.wxml"/>
 <view>
-  <view class="page-head">
-    <image class="index-search-image" src="/assets/search.png" bindtap="searchBtnClick"></image>
-    <view class="index-tips-text">{{tipsText}}</view>
-  </view>
   <view class="page-body">
     <template is="feed-list-template" data="{{feedList}}"/>
     <view class="bottom-loading-container" wx:if="{{showBottomLoading}}">

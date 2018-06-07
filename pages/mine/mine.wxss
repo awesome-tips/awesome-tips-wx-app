@@ -1,0 +1,55 @@
+@import "../../utils/common.wxss";
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #bfbfbf;
+}
+
+.mine-list {
+  display: block;
+}
+
+.mine-list-item {
+  margin: 25rpx 0;
+  background-color: #fffefc;
+  border-radius: 6rpx;
+  overflow: hidden;
+  border: .5px solid rgba(13,25,40,0.25);
+  box-shadow: 0 4px 10px 0 rgba(44,57,75,0.1);
+}
+.mine-list-item:first-child {
+  margin-top: 0;
+}
+.mine-list-item:last-child {
+  margin-bottom: 0;
+}
+.mine-list-item.item-hover {
+    box-shadow: 0 1px 3px 0 rgba(44,57,75,0.15);
+    transform: scale(.95);
+    transition: all 200ms;
+}
+
+.mine-list-item-title-area {
+  padding: 30rpx 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+}
+
+.mine-list-item-title-text {
+  flex: 1;
+  color: #515151;
+  font-size: 32rpx;
+}

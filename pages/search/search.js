@@ -1,6 +1,5 @@
 // search.js
 
-// 获取应用实例
 const app = getApp()
 const mta = require('../../utils/mta_analysis.js')
 const feedSearchUrl = require('../../config').feedSearchUrl
@@ -76,11 +75,11 @@ Page({
 
     if (self.data.loading) {
       // 正在搜索中，直接返回
-      return;
+      return
     }
 
     if (self.data.keyword == null || self.data.keyword.length == 0) {
-      return;
+      return
     }
 
     this.setData({
@@ -100,7 +99,12 @@ Page({
       method: 'GET',
       dataType: 'json',
       data: {
-        key: self.data.keyword
+        key: self.data.keyword,
+        filter: 'tips',
+      },
+      header: {
+        'from': app.globalData.appFrom,
+        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Search request success', result)
@@ -139,7 +143,6 @@ Page({
   feedItemClick: function (event) {
     var feed = event.currentTarget.dataset.feed
     if (feed && feed.fid) {
-      app.globalData.currentFeed = feed
       wx.navigateTo({
         url: '../detail/detail?fid=' + feed.fid
       })

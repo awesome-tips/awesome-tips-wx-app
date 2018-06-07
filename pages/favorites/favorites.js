@@ -1,42 +1,64 @@
-// pages/index/index.js
+// pages/favorites/favorites.js
 
 const app = getApp()
 const mta = require('../../utils/mta_analysis.js')
-const feedListUrl = require('../../config.js').feedListUrl
+const feedFavorListUrl = require('../../config.js').feedFavorListUrl
 
 Page({
-  // 页面数据
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    tipsText: '每天更新，专注于 iOS 知识分享',
     loading: false,
     canLoadMore: true,
     showBottomLoading: false,
-    feedPage: 1,    
+    feedPage: 1,
     feedList: []
   },
 
-  // 页面初始化
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
-    console.log('Index Page On Load With Options:', options)
     mta.Page.init()
-
-    // 加载首页第一页数据
-    wx.showNavigationBarLoading()
-    this.data.feedPage = 1
-    this.getFeedList()
-
-    // 从分享的群消息点进来，跳转到详情页
-    if (options.from && options.from == 'share') {
-      if (options.fid) {
-        wx.hideNavigationBarLoading()
-        wx.navigateTo({
-          url: '../detail/detail?fid=' + options.fid
-        })
-      }
-    }
   },
 
-  // 下拉刷新
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    // 重新加载第一页数据
+    wx.showNavigationBarLoading()
+    this.data.canLoadMore = true
+    this.data.feedPage = 1
+    this.getFeedFavorList()
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
   onPullDownRefresh: function () {
     var self = this
     if (self.data.loading) {
@@ -46,11 +68,13 @@ Page({
     setTimeout(function () {
       self.data.canLoadMore = true
       self.data.feedPage = 1
-      self.getFeedList()
+      self.getFeedFavorList()
     }, 1000)
   },
 
-  // 底部加载
+  /**
+   * 页面上拉触底事件的处理函数
+   */
   onReachBottom: function () {
     var self = this
     if (self.data.loading) {
@@ -65,11 +89,11 @@ Page({
       showBottomLoading: true
     })
     setTimeout(function () {
-      self.getFeedList()
+      self.getFeedFavorList()
     }, 1000)
   },
 
-  getFeedList: function () {
+  getFeedFavorList: function () {
     var self = this
 
     if (self.data.loading) {
@@ -88,11 +112,12 @@ Page({
 
     // 发起请求
     wx.request({
-      url: feedListUrl,
+      url: feedFavorListUrl,
       method: 'GET',
       dataType: 'json',
       data: {
         page: self.data.feedPage,
+        token: app.globalData.token,
         filter: 'tips',
       },
       header: {
@@ -100,7 +125,7 @@ Page({
         'version': app.globalData.appVersion,
       },
       success: function (result) {
-        console.log('Feed list request success', result)
+        console.log('Feed favor list request success', result)
         if (result.data.code == 0) { // 接口请求成功
           var feeds = result.data.data.feeds
           if (feeds && feeds.length > 0) { // 如果有返回数据
@@ -116,16 +141,26 @@ Page({
             })
           } else {
             // 标记不能加载更多了
+            if (self.data.feedPage == 1) {
+              self.setData({
+                feedList: []
+              })
+            }
             self.data.canLoadMore = false
             wx.showToast({
               icon: 'none',
-              title: '总共有 ' + self.data.feedList.length + ' 条小集，没有更多了'
+              title: '总共收藏了 ' + self.data.feedList.length + ' 条小集'
             })
           }
+        } else if (result.data.code == -1) {
+          // 登录失效，重新登录
+          app.reLoginThenCallback(function () {
+            self.getFeedFavorList()
+          })
         }
       },
       fail: function (errMsg) {
-        console.log('Feed list request fail', errMsg)
+        console.log('Feed favor list request fail', errMsg)
       },
       complete: function () {
         // 标记加载结束
@@ -156,21 +191,5 @@ Page({
       })
     }
   },
-
-  // 搜索按钮点击
-  searchBtnClick: function (event) {
-    wx.navigateTo({
-      url: '../search/search'
-    })
-  },
-
-  // 转发
-  onShareAppMessage: function (res) {
-    return {
-      title: '专注于 iOS 知识分享',
-      path: 'pages/index/index?from=share',
-      imageUrl: 'https://tips.kangzubin.com/share.jpg'
-    }
-  },
-
+  
 })

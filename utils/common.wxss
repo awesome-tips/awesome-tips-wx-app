@@ -1,10 +1,14 @@
+.hidePage {
+  display: none
+}
+
 .page-head {
-  padding: 30rpx;
+  padding: 25rpx;
   text-align: center;
 }
 
 .page-body {
-  padding: 0 30rpx 30rpx;
+  padding: 25rpx;
 }
 
 .feed-list {
@@ -12,7 +16,7 @@
 }
 
 .feed-list-item {
-  margin: 30rpx 0;
+  margin: 25rpx 0;
   background-color: #fffefc;
   border-radius: 6rpx;
   overflow: hidden;
@@ -22,6 +26,9 @@
 .feed-list-item:first-child {
   margin-top: 0;
 }
+.feed-list-item:last-child {
+  margin-bottom: 0;
+}
 .feed-list-item.item-hover {
     box-shadow: 0 1px 3px 0 rgba(44,57,75,0.15);
     transform: scale(.95);
@@ -29,7 +36,7 @@
 }
 
 .feed-list-item-title-area {
-  padding: 30rpx 30rpx;
+  padding: 35rpx 30rpx;
   display: flex;
   align-items: center;
   transition: opacity .3s;
@@ -52,4 +59,14 @@
   flex: 1;
   color: #bfbfbf;
   font-size: 22rpx;
+}
+
+.bottom-loading-container {
+  text-align: center;
+  padding-top: 30rpx;
+}
+
+.bottom-loading-image {
+  width: 60rpx;
+  height: 60rpx;
 }

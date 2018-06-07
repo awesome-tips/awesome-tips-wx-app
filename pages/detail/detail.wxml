@@ -1,15 +1,16 @@
 <import src="/towxml/entry.wxml"/>
 
-<view class="{{pageHide ? 'hidePage' : 'tip-content-view'}}">
+<view class="{{pageHide ? 'hidePage' : 'feed-content-view'}}">
   <view class="h2w h2w-light">
     <view class="h2w__title">
-      <view class="tip-title-view">{{feed.title}}</view>
-      <view class="tip-date-auther-view">{{feed.postdate}} @{{feed.auther}}</view>
+      <view class="feed-title-view">{{feed.title}}</view>
+      <view class="feed-date-auther-view">{{feed.postdate}} @{{feed.author}}</view>
     </view>
   </view>
-  <template is="entry" data="{{...article}}"/>  
+  <template is="entry" data="{{...article}}"/>
 </view>
-<view class="{{pageHide ? 'hidePage' : 'tip-bottom-view'}}">
-  <button class="tip-bottom-btn-view tip-btn-left" bindtap="copyLinkButtonClick">复制原文链接</button>
-  <button class="tip-bottom-btn-view tip-btn-right" open-type="share">分享给好友</button>
+
+<view class="{{pageHide ? 'hidePage' : 'feed-bottom-view'}}">
+  <button class="feed-bottom-btn-view feed-btn-left" bindtap="favorButtonClick">{{favorTitle}}</button>
+  <button class="feed-bottom-btn-view feed-btn-right" open-type="share">转发</button>
 </view>

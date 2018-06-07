@@ -1,5 +1,9 @@
 @import "../../utils/common.wxss";
 
+.page-body {
+  padding-top: 0;
+}
+
 .index-search-image {
   width: 60rpx;
   height: 60rpx;

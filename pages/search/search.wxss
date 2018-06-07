@@ -1,5 +1,9 @@
 @import "../../utils/common.wxss";
 
+.page-body {
+  padding-top: 0;
+}
+
 .search-input {
   height: 2.59em;
   min-height: 2.59em;

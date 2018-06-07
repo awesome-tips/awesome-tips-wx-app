@@ -1,0 +1,25 @@
+<view>
+  <view class="page-head">
+    <view class="userinfo">
+      <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 关联微信 </button>
+      <block wx:else>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="page-body">
+    <view class="mine-list">
+      <view class="mine-list-item" hover-class="item-hover" bindtap="favorBtnClick">
+        <view class="mine-list-item-title-area">
+          <view class="mine-list-item-title-text">我的收藏</view>
+        </view>
+      </view>
+      <view class="mine-list-item" hover-class="item-hover" bindtap="aboutBtnClick">
+        <view class="mine-list-item-title-area">
+          <view class="mine-list-item-title-text">关于我们</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

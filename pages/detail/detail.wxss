@@ -5,21 +5,21 @@
   display: none
 }
 
-.tip-content-hide {
-  display: none
-}
-
-.tip-content-view {
-  background-color: #FFFFFF;
-  height: 100%;
-}
-
 .h2w__title {
   margin:0 30rpx;
   padding-top:30rpx;
 }
 
-.tip-title-view {
+.feed-content-hide {
+  display: none
+}
+
+.feed-content-view {
+  background-color: #FFFFFF;
+  height: 100%;
+}
+
+.feed-title-view {
   font-weight:bold;
   border-bottom-style:double;
   border-bottom-width:6rpx;
@@ -28,14 +28,14 @@
   border-color:#eee;
 }
 
-.tip-date-auther-view {
+.feed-date-auther-view {
   padding-top:10rpx;
   padding-bottom:10rpx;
   font-size:30rpx;
   color: #AFAFAF;
 }
 
-.tip-bottom-view {
+.feed-bottom-view {
   background-color: #F8F8F8;
   width: 100%;
   height: 100rpx;
@@ -47,7 +47,7 @@
   border-color: #DBDBDB;
 }
 
-.tip-bottom-btn-view {
+.feed-bottom-btn-view {
   width: 50%;
   height: 100%;
   color: #ABABAB;
@@ -62,11 +62,11 @@
   line-height: 40rpx;
 }
 
-.tip-btn-left {
+.feed-btn-left {
   float: left;
 }
 
-.tip-btn-right {
+.feed-btn-right {
   float: right;
 }
 
