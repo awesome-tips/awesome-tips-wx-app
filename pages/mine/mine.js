@@ -65,7 +65,7 @@ Page({
 
   // 点击登录获取微信用户信息
   getUserInfo: function (e) {
-    var userInfo = e.detail.userInfo
+    const userInfo = e.detail.userInfo
     if (userInfo) {
       app.updateUserInfo(userInfo)
     } else {

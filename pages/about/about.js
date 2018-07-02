@@ -32,7 +32,7 @@ Page({
       this.getFeedDetail()
     } else {
       // 未登录延迟加载
-      var self = this
+      const self = this
       app.addLoginReadyCallback(function () {
         self.getFeedDetail()
       })
@@ -41,7 +41,7 @@ Page({
 
   // 获取小集详情
   getFeedDetail: function () {
-    var self = this
+    const self = this
 
     if (self.data.fid == null) {
       return
@@ -69,7 +69,7 @@ Page({
       success: function (result) {
         console.log('Feed about request success', result)
         if (result.data.code == 0) { // 接口请求成功
-          var feed = result.data.data.feed
+          const feed = result.data.data.feed
           if (feed) {
             self.setData({
               feed: feed
@@ -93,18 +93,18 @@ Page({
 
   // 渲染 Markdown 内容
   feedConetntRendering: function () {
-    var self = this
-    var feed = self.data.feed
+    const self = this
+    const feed = self.data.feed
     if (!feed) {
       wx.hideLoading()
       return
     }
 
-    var contentType = 'markdown'
+    let contentType = 'markdown'
     if (feed.type == 1) {
       contentType = 'html'
     }
-    var content = feed.content
+    let content = feed.content
     if (!content || content.length == 0) {
       content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看：[' + feed.url + '](' + feed.url + ')'
     }
@@ -119,13 +119,13 @@ Page({
 
   // 复制文中链接
   onUrlLinkTap: function (sender) {
-    var url = sender.currentTarget.dataset.url
+    const url = sender.currentTarget.dataset.url
     this.setUrlToClipboard(url)
   },
 
   // 打开图片浏览
   onImageTap: function (sender) {
-    var url = sender.currentTarget.dataset.src
+    const url = sender.currentTarget.dataset.src
     if (url && url.length > 0) {
       wx.previewImage({
         current: url,

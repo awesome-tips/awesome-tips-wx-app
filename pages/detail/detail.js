@@ -25,7 +25,7 @@ Page({
   onLoad: function (options) {
     mta.Page.init()
 
-    var fid = options.fid
+    const fid = options.fid
     if (fid) {
       this.setData({
         fid: fid
@@ -41,7 +41,7 @@ Page({
         this.getFeedDetail()
       } else {
         // 未登录延迟加载
-        var self = this
+        const self = this
         app.addLoginReadyCallback(function(){
           self.getFeedDetail()
         })
@@ -53,7 +53,7 @@ Page({
 
   // 获取小集详情
   getFeedDetail: function () {
-    var self = this
+    const self = this
 
     if (self.data.fid == null) {
       return
@@ -81,7 +81,7 @@ Page({
       success: function (result) {
         console.log('Feed detail request success', result)
         if (result.data.code == 0) { // 接口请求成功
-          var feed = result.data.data.feed
+          const feed = result.data.data.feed
           if (feed) {
             self.setData({
               feed: feed
@@ -106,8 +106,8 @@ Page({
 
   // 渲染 Markdown 内容
   feedConetntRendering: function () {
-    var self = this
-    var feed = self.data.feed
+    const self = this
+    const feed = self.data.feed
     if (!feed) {
       wx.hideLoading()
       return
@@ -119,11 +119,11 @@ Page({
       })
     }
 
-    var contentType = 'markdown'
+    let contentType = 'markdown'
     if (feed.type == 1) {
       contentType = 'html'
     }
-    var content = feed.content
+    let content = feed.content
     if (!content || content.length == 0) {
       content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看：[' + feed.url + '](' + feed.url + ')'
     }
@@ -138,7 +138,7 @@ Page({
 
   // 小集不存在
   feedNotFoundError: function () {
-    var tipsTitle = '该小集不存在'
+    const tipsTitle = '该小集不存在'
     wx.setNavigationBarTitle({
       title: tipsTitle
     })
@@ -154,10 +154,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var self = this
+    const self = this
     if (self.data.feed) {
-      var title = self.data.feed.title
-      var path = 'pages/index/index?from=share&fid=' + self.data.feed.fid
+      const title = self.data.feed.title
+      const path = 'pages/index/index?from=share&fid=' + self.data.feed.fid
       return {
         title: title,
         path: path,
@@ -170,7 +170,7 @@ Page({
 
   // 收藏按钮点击
   favorButtonClick: function () {
-    var self = this
+    const self = this
     if (!app.globalData.hasLogined) {
       app.reLoginThenCallback(function(){
         self.favorButtonClick()
@@ -185,7 +185,7 @@ Page({
     // 标记正在加载中
     self.data.loading = true
 
-    var favorValue = self.data.feed.favor == 0 ? 1 : 0
+    const favorValue = self.data.feed.favor == 0 ? 1 : 0
     wx.request({
       url: feedFavorlUrl,
       method: 'GET',
@@ -207,7 +207,7 @@ Page({
             icon: 'success',
             title: favorValue == 0 ? '取消收藏成功' : '收藏成功'
           })
-          var favorTitleValue = favorValue == 0 ? '收藏' : '取消收藏'
+          const favorTitleValue = favorValue == 0 ? '收藏' : '取消收藏'
           self.data.feed.favor = favorValue
           self.setData({
             favorTitle: favorTitleValue
@@ -247,13 +247,13 @@ Page({
 
   // 复制文中链接
   onUrlLinkTap: function (sender) {
-    var url = sender.currentTarget.dataset.url
+    const url = sender.currentTarget.dataset.url
     this.setUrlToClipboard(url)
   },
 
   // 打开图片浏览
   onImageTap: function (sender) {
-    var url = sender.currentTarget.dataset.src
+    const url = sender.currentTarget.dataset.src
     if (url && url.length > 0) {
       wx.previewImage({
         current: url,

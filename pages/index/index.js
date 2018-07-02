@@ -38,7 +38,7 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function () {
-    var self = this
+    const self = this
     if (self.data.loading) {
       // 正在加载中，直接返回
       return
@@ -52,7 +52,7 @@ Page({
 
   // 底部加载
   onReachBottom: function () {
-    var self = this
+    const self = this
     if (self.data.loading) {
       // 正在加载中，直接返回
       return
@@ -70,7 +70,7 @@ Page({
   },
 
   getFeedList: function () {
-    var self = this
+    const self = this
 
     if (self.data.loading) {
       // 正在加载中，直接返回
@@ -102,10 +102,10 @@ Page({
       success: function (result) {
         console.log('Feed list request success', result)
         if (result.data.code == 0) { // 接口请求成功
-          var feeds = result.data.data.feeds
+          const feeds = result.data.data.feeds
           if (feeds && feeds.length > 0) { // 如果有返回数据
-            var newFeedPage = self.data.feedPage + 1
-            var newFeedList = []
+            const newFeedPage = self.data.feedPage + 1
+            let newFeedList = []
             if (self.data.feedPage > 1) {
               newFeedList = newFeedList.concat(self.data.feedList)
             }
@@ -139,7 +139,7 @@ Page({
   closeLoadingView: function () {
     wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
-    var self = this
+    const self = this
     if (self.data.showBottomLoading) {
       self.setData({
         showBottomLoading: false
@@ -149,7 +149,7 @@ Page({
 
   // 列表项点击
   feedItemClick: function (event) {
-    var feed = event.currentTarget.dataset.feed
+    const feed = event.currentTarget.dataset.feed
     if (feed && feed.fid) {
       wx.navigateTo({
         url: '../detail/detail?fid=' + feed.fid
