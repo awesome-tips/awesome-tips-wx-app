@@ -3,10 +3,10 @@
  */
 
 // 测试环境
-// var apiHost = "http://localhost/AwesomeTips/api"
-var apiHost = "https://tips.kangzubin.com/api"
+// const apiHost = "http://localhost/AwesomeTips/api"
+const apiHost = "https://tips.kangzubin.com/api"
 
-var config = {
+const config = {
   // 列表
   feedListUrl: `${apiHost}/feed/list`,
   // 搜索

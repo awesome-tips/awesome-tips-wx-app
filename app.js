@@ -54,7 +54,7 @@ App({
   },
 
   checkUserLogin: function () {
-    var self = this
+    const self = this
     if (self.globalData.hasLogined) {
       return;
     }
@@ -66,8 +66,8 @@ App({
     self.globalData.isCheckingSession = true;
 
     // 先取本地缓存（同步）
-    var token = wx.getStorageSync('token')
-    var openId = wx.getStorageSync('openId')
+    const token = wx.getStorageSync('token')
+    const openId = wx.getStorageSync('openId')
     if (token && openId) {
       // 如果已登录，检查 session_key 是否过期
       wx.checkSession({
@@ -94,7 +94,7 @@ App({
   },
 
   doUserLogin: function () {
-    var self = this
+    const self = this
     if (self.globalData.isLoginning) {
       return;
     }
@@ -119,8 +119,8 @@ App({
           success: function (res) {
             if (res.data.code == 0) {
               console.log('登录成功:', res)
-              var token = res.data.data.token
-              var openId = res.data.data.openId
+              const token = res.data.data.token
+              const openId = res.data.data.openId
               if (token && openId) {
                 wx.setStorage({
                   key: 'token',
@@ -159,7 +159,7 @@ App({
   },
 
   getWXUserInfo: function () {
-    var self = this
+    const self = this
     // 判断用户是否授权过获取用户信息
     wx.getSetting({
       success: function (res) {
@@ -179,7 +179,7 @@ App({
   },
 
   updateUserInfo: function (userInfo) {
-    var self = this
+    const self = this
     if (userInfo) {
       self.globalData.userInfo = userInfo
       // 执行延迟回调

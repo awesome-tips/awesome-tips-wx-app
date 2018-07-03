@@ -51,7 +51,7 @@ Page({
   },
 
   gotoSearch: function (e) {
-    var keyword = e.detail.value.trim()
+    const keyword = e.detail.value.trim()
     if (keyword.length > 0) {
       if (keyword == this.data.keyword) {
         // 如果两次关键词一致，则忽略
@@ -71,7 +71,7 @@ Page({
   },
 
   searchFeedList: function () {
-    var self = this
+    const self = this
 
     if (self.data.loading) {
       // 正在搜索中，直接返回
@@ -109,7 +109,7 @@ Page({
       success: function (result) {
         console.log('Search request success', result)
         if (result.data.code == 0) { // 接口请求成功
-          var feeds = result.data.data.feeds
+          const feeds = result.data.data.feeds
           if (feeds && feeds.length > 0) { // 如果有返回数据
             self.setData({
               feedList: feeds,
@@ -141,7 +141,7 @@ Page({
 
   // 列表项点击
   feedItemClick: function (event) {
-    var feed = event.currentTarget.dataset.feed
+    const feed = event.currentTarget.dataset.feed
     if (feed && feed.fid) {
       wx.navigateTo({
         url: '../detail/detail?fid=' + feed.fid
