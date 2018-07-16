@@ -106,12 +106,12 @@ Page({
           if (feeds && feeds.length > 0) { // 如果有返回数据
             let newFeedList = []
             if (self.data.feedPage == 1) {
-              feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
+              // feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
             } else {
               newFeedList = newFeedList.concat(self.data.feedList)
             }
             newFeedList = newFeedList.concat(feeds)
-            newFeedList.push({fid:-1}) // 每一页末尾插入一条广告
+            // newFeedList.push({fid:-1}) // 每一页末尾插入一条广告
             const newFeedPage = self.data.feedPage + 1
             self.setData({
               feedPage: newFeedPage,

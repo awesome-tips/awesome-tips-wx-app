@@ -160,22 +160,23 @@ App({
 
   getWXUserInfo: function () {
     const self = this
+    // 过渡期，暂时直接调 wx.getUserInfo 获取用户信息，后续再调整
     // 判断用户是否授权过获取用户信息
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
+    // wx.getSetting({
+    //   success: function (res) {
+    //     if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: function (res) {
               self.updateUserInfo(res.userInfo)
             }
           })
-        }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    })
+    //     }
+    //   },
+    //   fail: function (err) {
+    //     console.log(err)
+    //   }
+    // })
   },
 
   updateUserInfo: function (userInfo) {
