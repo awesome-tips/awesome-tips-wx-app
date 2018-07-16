@@ -4,6 +4,9 @@
     <input class="search-input" maxlength="15" auto-focus placeholder="请输入关键字，例如: iOS" bindconfirm="gotoSearch"/>
   </view>
   <view class="page-body">
+    <view class="ad-view-item">
+      <ad unit-id="adunit-4bc7150f9217b11a"></ad>
+    </view>
     <template is="feed-list-template" data="{{feedList}}"/>
   </view>
 </view>

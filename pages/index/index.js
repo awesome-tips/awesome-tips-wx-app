@@ -11,7 +11,7 @@ Page({
     loading: false,
     canLoadMore: true,
     showBottomLoading: false,
-    feedPage: 1,    
+    feedPage: 1,
     feedList: []
   },
 
@@ -102,14 +102,17 @@ Page({
       success: function (result) {
         console.log('Feed list request success', result)
         if (result.data.code == 0) { // 接口请求成功
-          const feeds = result.data.data.feeds
+          let feeds = result.data.data.feeds
           if (feeds && feeds.length > 0) { // 如果有返回数据
-            const newFeedPage = self.data.feedPage + 1
             let newFeedList = []
-            if (self.data.feedPage > 1) {
+            if (self.data.feedPage == 1) {
+              feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
+            } else {
               newFeedList = newFeedList.concat(self.data.feedList)
             }
             newFeedList = newFeedList.concat(feeds)
+            newFeedList.push({fid:-1}) // 每一页末尾插入一条广告
+            const newFeedPage = self.data.feedPage + 1
             self.setData({
               feedPage: newFeedPage,
               feedList: newFeedList

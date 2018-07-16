@@ -9,7 +9,7 @@ App({
   // 全局数据
   globalData: {
     appFrom: 'wxapp',
-    appVersion: '1.1.0',
+    appVersion: '1.1.1',
     token: null,
     openId: null,
     userInfo: null,

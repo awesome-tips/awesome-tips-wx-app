@@ -1,7 +1,10 @@
 <template name="feed-list-template">
   <view class="feed-list">
     <block wx:for-items="{{feedList}}" wx:key="{{item.fid}}">
-      <view id="{{item.fid}}" class="feed-list-item" hover-class="item-hover" data-feed="{{item}}" bindtap="feedItemClick">
+      <view wx:if="{{item.fid == -1}}" class="ad-view-item">
+        <ad unit-id="adunit-643e6c06be88b2c5"></ad>
+      </view>
+      <view wx:else id="{{item.fid}}" class="feed-list-item" hover-class="item-hover" data-feed="{{item}}" bindtap="feedItemClick">
         <view class="feed-list-item-title-area">
           <view class="feed-list-item-title-text">{{item.title}}</view>
         </view>

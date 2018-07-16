@@ -10,6 +10,20 @@
   padding-top:30rpx;
 }
 
+.h2w__main {
+  margin:0 30rpx;
+  padding-top:20rpx;
+  padding-bottom:20rpx;
+}
+
+.detail-ad-view {
+  margin:0 30rpx;
+  padding-top:30rpx;
+  padding-bottom:130rpx;
+  display:flex;
+  justify-content:center;
+}
+
 .feed-content-hide {
   display: none
 }
