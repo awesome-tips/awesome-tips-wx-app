@@ -1,5 +1,5 @@
 <import src="/towxml/entry.wxml"/>
 
-<view class="{{pageHide ? 'hidePage' : 'feed-content-view'}}">
+<view wx:if="{{!pageHide}}" class="about-content-view">
   <template is="entry" data="{{...article}}"/>
 </view>

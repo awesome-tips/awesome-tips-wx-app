@@ -26,8 +26,8 @@
   background-color: #fffefc;
   border-radius: 6rpx;
   overflow: hidden;
-  border: .5px solid rgba(13,25,40,0.25);
-  box-shadow: 0 4px 10px 0 rgba(44,57,75,0.1);
+  border: 1rpx solid rgba(13,25,40,0.25);
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }
 .mine-list-item:first-child {
   margin-top: 0;
@@ -36,7 +36,7 @@
   margin-bottom: 0;
 }
 .mine-list-item.item-hover {
-    box-shadow: 0 1px 3px 0 rgba(44,57,75,0.15);
+    box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
     transform: scale(.95);
     transition: all 200ms;
 }
