@@ -40,6 +40,9 @@
   display:flex;
   justify-content:center;
 }
+.detail-ad-view-IPX {
+  padding-bottom: 98px;
+}
 
 .feed-bottom-view {
   width: 100%;
@@ -52,6 +55,9 @@
   border-color: lightgrey;
   background-color: #F8F8F8;
 }
+.feed-bottom-view-IPX {
+  padding-bottom: 34px;
+}
 
 .feed-bottom-btn-view {
   width: 50%;
@@ -59,7 +65,7 @@
   color: #ABABAB;
   font-size: 16px;
   line-height: 1;
-  padding-top: 16px;
+  padding-top: 17px;
   border-radius: 0;
 }
 

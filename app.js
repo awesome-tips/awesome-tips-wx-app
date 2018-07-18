@@ -16,6 +16,7 @@ App({
     hasLogined: false,
     isLoginning: false,
     isCheckingSession: false,
+    isIPX: false, // 当前设备是否为 iPhone X
   },
 
   // 登录成功后的回调
@@ -41,6 +42,9 @@ App({
       "statShareApp": true
     })
 
+    // 判断设备是否为 iPhone X
+    this.checkIsIPhoneX()
+
     // 用户登录态校验
     this.checkUserLogin()
   },
@@ -51,6 +55,17 @@ App({
 
   onHide: function () {
     console.log('App On Hide')
+  },
+
+  checkIsIPhoneX: function() {
+    const self = this
+    wx.getSystemInfo({
+      success: function (res) {
+        if (res.model == 'iPhone X') {
+          self.globalData.isIPX = true
+        }
+      }
+    })
   },
 
   checkUserLogin: function () {

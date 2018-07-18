@@ -8,12 +8,12 @@
     </view>
   </view>
   <template is="entry" data="{{...article}}"/>
-  <view class="detail-ad-view">
+  <view class="{{isIPX ? 'detail-ad-view detail-ad-view-IPX' : 'detail-ad-view'}}">
     <ad unit-id="adunit-70656baced0a8d45"></ad>
   </view>
 </view>
 
-<view wx:if="{{!pageHide}}" class="feed-bottom-view">
+<view wx:if="{{!pageHide}}" class="{{isIPX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}">
   <button class="feed-bottom-btn-view feed-btn-left" bindtap="favorButtonClick">{{favorTitle}}</button>
   <button class="feed-bottom-btn-view feed-btn-right" open-type="share">转发</button>
 </view>

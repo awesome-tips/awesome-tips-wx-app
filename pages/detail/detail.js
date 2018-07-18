@@ -16,6 +16,7 @@ Page({
     loading: false,
     pageHide: true,
     favorTitle: '收藏',
+    isIPX: app.globalData.isIPX,
     article: {}
   },
 
