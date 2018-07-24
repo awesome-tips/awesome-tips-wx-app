@@ -13,8 +13,8 @@
 }
 
 .feed-content-view {
-  background-color: #FFFFFF;
-  height: 100%;
+  background-color: transparent;
+  /* height: 100%; */
 }
 
 .feed-title-view {

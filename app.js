@@ -9,7 +9,7 @@ App({
   // 全局数据
   globalData: {
     appFrom: 'wxapp',
-    appVersion: '1.1.1',
+    appVersion: '1.1.3',
     token: null,
     openId: null,
     userInfo: null,
@@ -61,7 +61,8 @@ App({
     const self = this
     wx.getSystemInfo({
       success: function (res) {
-        if (res.model == 'iPhone X') {
+        console.log(res)
+        if (res.model.search('iPhone X') != -1) {
           self.globalData.isIPX = true
         }
       }
