@@ -5,11 +5,15 @@
     "pages/search/search",
     "pages/mine/mine",
     "pages/favorites/favorites",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/discover/discover",
+    "pages/subscribe/subscribe",
+    "pages/feedback/feedback",
+    "pages/more/more"
   ],
   "tabBar": {
-    "color": "#7a7e83",
-    "selectedColor": "#1aad19",
+    "color": "#cdcdcd",
+    "selectedColor": "#333333",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -18,6 +22,12 @@
         "iconPath": "assets/icon_Index.png",
         "selectedIconPath": "assets/icon_Index_HL.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "iconPath": "assets/icon_Discover.png",
+        "selectedIconPath": "assets/icon_Discover_HL.png",
+        "text": "发现"
       },
       {
         "pagePath": "pages/mine/mine",

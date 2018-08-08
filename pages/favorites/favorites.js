@@ -1,8 +1,6 @@
 // pages/favorites/favorites.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
-const feedFavorListUrl = require('../../config.js').feedFavorListUrl
 
 Page({
 
@@ -21,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    mta.Page.init()
+    app.mta.Page.init()
   },
 
   /**
@@ -111,18 +109,11 @@ Page({
     self.data.loading = true
 
     // 发起请求
-    wx.request({
-      url: feedFavorListUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedFavorListUrl,
       data: {
         page: self.data.feedPage,
-        token: app.globalData.token,
         filter: 'tips',
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Feed favor list request success', result)

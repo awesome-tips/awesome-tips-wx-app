@@ -1,15 +1,18 @@
-// app.js
+//
+//  app.js
+//  AwesomeTips
+//
+//  Created by KANGZUBIN on 2018/3/21.
+//  Copyright © 2018 All rights reserved.
+//
 
 const towxml = require('./towxml/main.js')
-const mta = require('./utils/mta_analysis.js')
-const userLoginUrl = require('./config.js').userLoginUrl
-const userUpdateUrl = require('./config.js').userUpdateUrl
 
 App({
   // 全局数据
   globalData: {
     appFrom: 'wxapp',
-    appVersion: '1.1.3',
+    appVersion: '1.2.0',
     token: null,
     openId: null,
     userInfo: null,
@@ -19,21 +22,33 @@ App({
     isIPX: false, // 当前设备是否为 iPhone X
   },
 
-  // 登录成功后的回调
+  // HTTP 接口地址
+  URL: require('./utils/config.js'),
+
+  // HTTP 网络请求
+  HTTP: require('./utils/http.js'),
+
+  // MTA 埋点统计
+  mta: require('./utils/mta.js'),
+
+  // Markdown 渲染引擎
+  render: new towxml(),
+
+  // 工具方法集合
+  util: require('./utils/util.js'),
+
+  // 登录成功后的回调数组
   loginReadyCallbacks: [],
 
-  // 微信用户信息获取成功后的回调
+  // 微信用户信息获取成功后的回调（我的页面用到）
   userInfoReadyCallback: null,
-
-  // 渲染引擎
-  render: new towxml(),
 
   // 小程序启动入口
   onLaunch: function (options) {
     console.log('App On Launch With Options:', options)
 
     // MTA 统计初始化
-    mta.App.init({
+    this.mta.App.init({
       "appID": "500604211",
       "eventID": "500604331",
       "lauchOpts": options,
@@ -45,30 +60,34 @@ App({
     // 判断设备是否为 iPhone X
     this.checkIsIPhoneX()
 
-    // 用户登录态校验
+    // 校验用户登录态
     this.checkUserLogin()
   },
 
-  onShow: function () {
-    console.log('App On Show')
+  // 小程序显示
+  onShow: function (options) {
+    console.log('App On Show With Options:', options)
   },
 
+  // 小程序隐藏
   onHide: function () {
     console.log('App On Hide')
   },
 
+  // 判断设备是否为 iPhone X
   checkIsIPhoneX: function() {
     const self = this
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res)
-        if (res.model.search('iPhone X') != -1) {
-          self.globalData.isIPX = true
-        }
+    try {
+      const res = wx.getSystemInfoSync()
+      if (res.model.search('iPhone X') != -1) {
+        self.globalData.isIPX = true
       }
-    })
+    } catch (e) {
+      // catch error
+    }
   },
 
+  // 校验用户登录态
   checkUserLogin: function () {
     const self = this
     if (self.globalData.hasLogined) {
@@ -90,9 +109,12 @@ App({
         success: function () {
           // 服务端 session_key 未过期，并且在本生命周期一直有效
           self.globalData.token = token
+          self.HTTP.token = token
           self.globalData.openId = openId
           self.globalData.hasLogined = true
+          // 执行所有等待登录的延迟回调
           self.execLoginReadyCallbacks()
+          // 获取微信用户信息
           self.getWXUserInfo()
         },
         fail: function () {
@@ -104,11 +126,13 @@ App({
         }
       })
     } else {
+      // 本地没有缓存，执行登录流程
       self.doUserLogin()
       self.globalData.isCheckingSession = false;
     }
   },
 
+  // 执行登录流程
   doUserLogin: function () {
     const self = this
     if (self.globalData.isLoginning) {
@@ -117,24 +141,18 @@ App({
 
     self.globalData.isLoginning = true;
 
-    // 登录
+    // 微信登录方法
     wx.login({
       success: function (res) {
-        wx.request({
-          url: userLoginUrl,
-          method: 'POST',
-          dataType: 'json',
+        // wx.login 执行成功，根据用户登录凭证 res.code 换取 openId 和 token
+        self.HTTP.POST({
+          url: self.URL.userLoginUrl,
           data: {
             code: res.code
           },
-          header: {
-            'from': self.globalData.appFrom,
-            'version': self.globalData.appVersion,
-            'content-type': 'application/x-www-form-urlencoded',
-          },
           success: function (res) {
             if (res.data.code == 0) {
-              console.log('登录成功:', res)
+              console.log('微信登录成功:', res)
               const token = res.data.data.token
               const openId = res.data.data.openId
               if (token && openId) {
@@ -147,36 +165,41 @@ App({
                   data: openId
                 })
                 self.globalData.token = token
+                self.HTTP.token = token
                 self.globalData.openId = openId
                 self.globalData.hasLogined = true
 
-                // 执行延迟回调
+                // 执行所有等待登录的延迟回调
                 self.execLoginReadyCallbacks()
-
-                // 登录成功，获取微信用户信息
+                // 获取微信用户信息
                 self.getWXUserInfo()
               }
             } else {
-              console.log('登录失败:', res)
+              console.log('微信登录失败:', res)
             }
           },
           fail: function (err) {
-            console.log('登录失败:', err)
+            console.log('微信登录失败:', err)
           },
-          complete: function () {
+          complete: function (res) {
             self.globalData.isLoginning = false;
           }
         })
       },
       fail: function (err) {
+        // wx.login 执行失败
+        console.log('wx.login 执行失败:', err)
         self.globalData.isLoginning = false;
       }
     })
   },
 
+  // 获取微信用户信息
   getWXUserInfo: function () {
     const self = this
-    // 过渡期，暂时直接调 wx.getUserInfo 获取用户信息，后续再调整
+
+    // NOTE: 过渡期，这里暂时直接调 wx.getUserInfo 获取用户信息（开发版和体验版不起效），以便用户一进入就直接弹窗获取用户信息
+    
     // 判断用户是否授权过获取用户信息
     // wx.getSetting({
     //   success: function (res) {
@@ -195,54 +218,50 @@ App({
     // })
   },
 
+  // 更新当前用户信息
   updateUserInfo: function (userInfo) {
     const self = this
     if (userInfo) {
       self.globalData.userInfo = userInfo
-      // 执行延迟回调
+      // 执行获取用户信息的延迟回调（只有我的页面用到）
       if (self.userInfoReadyCallback) {
         self.userInfoReadyCallback(userInfo)
         self.userInfoReadyCallback = null
       }
       if (!self.globalData.hasLogined) {
+        // 如果未登录（没有登录态 token），直接返回
         return
       }
       // 调接口更新用户头像、昵称、性别
-      wx.request({
-        url: userUpdateUrl,
-        method: 'POST',
-        dataType: 'json',
+      self.HTTP.POST({
+        url: self.URL.userUpdateUrl,
         data: {
           name: userInfo.nickName,
           avatar: userInfo.avatarUrl,
           gender: userInfo.gender,
-          token: self.globalData.token,
-        },
-        header: {
-          'from': self.globalData.appFrom,
-          'version': self.globalData.appVersion,
-          'content-type': 'application/x-www-form-urlencoded',
         },
         success: function (res) {
           if (res.data.code == 0) {
             console.log('用户信息更新成功')
           } else if (res.data.code == -1) {
-            console.log('用户信息更新失败', res)
+            console.log('用户信息更新时登录失效:', res)
+            // 登录失效，重新执行登录流程
             self.reLoginThenCallback()
           } else {
-            console.log('用户信息更新失败', res)
+            console.log('用户信息更新失败:', res)
           }
         },
         fail: function (err) {
-          console.log(err)
-        },
+          console.log('用户信息更新接口调用失败', res)
+        }
       })
     }
   },
 
   reLoginThenCallback: function (callback) {
-    console.log('重新登录')
+    console.log('登录失效，重新登录')
     this.globalData.token = null
+    this.HTTP.token = token
     this.globalData.hasLogined = false
     this.loginReadyCallbacks = []
     this.addLoginReadyCallback(callback)

@@ -1,8 +1,6 @@
 // pages/about/about.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
-const feedDetailUrl = require('../../config').feedDetailUrl
 
 Page({
 
@@ -21,7 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    mta.Page.init()
+    app.mta.Page.init()
+
     wx.showLoading({
       icon: 'loading'
     })
@@ -54,20 +53,13 @@ Page({
     // 标记正在加载中
     self.data.loading = true
 
-    wx.request({
-      url: feedDetailUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedDetailUrl,
       data: {
         fid: self.data.fid,
-        token: app.globalData.token,
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
-        console.log('Feed about request success', result)
+        console.log('About Content request success', result)
         if (result.data.code == 0) { // 接口请求成功
           const feed = result.data.data.feed
           if (feed) {
@@ -81,7 +73,7 @@ Page({
         wx.hideLoading()
       },
       fail: function (errMsg) {
-        console.log('Feed about request fail', errMsg)
+        console.log('About Content request fail', errMsg)
         wx.hideLoading()
       },
       complete: function () {
@@ -106,7 +98,8 @@ Page({
     }
     let content = feed.content
     if (!content || content.length == 0) {
-      content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看：[' + feed.url + '](' + feed.url + ')'
+      wx.hideLoading()
+      return
     }
 
     let articleData = app.render.toJson(content, contentType)
@@ -118,34 +111,9 @@ Page({
   },
 
   // 复制文中链接
-  onUrlLinkTap: function (sender) {
-    const url = sender.currentTarget.dataset.url
-    this.setUrlToClipboard(url)
-  },
+  onUrlLinkTap: app.util.onUrlLinkTap,
 
   // 打开图片浏览
-  onImageTap: function (sender) {
-    const url = sender.currentTarget.dataset.src
-    if (url && url.length > 0) {
-      wx.previewImage({
-        current: url,
-        urls: [url]
-      })
-    }
-  },
-
-  setUrlToClipboard: function (url) {
-    if (url && url.length > 0) {
-      wx.setClipboardData({
-        data: url,
-        success: function (res) {
-          wx.showToast({
-            icon: 'success',
-            title: '链接已复制'
-          })
-        }
-      })
-    }
-  },
+  onImageTap: app.util.onImageTap,
 
 })

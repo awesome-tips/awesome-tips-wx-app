@@ -1,8 +1,6 @@
 // search.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
-const feedSearchUrl = require('../../config').feedSearchUrl
 
 Page({
 
@@ -19,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    mta.Page.init()
+    app.mta.Page.init()
   },
 
   /**
@@ -94,17 +92,11 @@ Page({
     // 标记正在加载中
     self.data.loading = true
 
-    wx.request({
-      url: feedSearchUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedSearchUrl,
       data: {
         key: self.data.keyword,
         filter: 'tips',
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Search request success', result)

@@ -10,16 +10,13 @@
   </view>
   <view class="page-body">
     <view class="mine-list">
-      <view class="mine-list-item" hover-class="item-hover" bindtap="favorBtnClick">
-        <view class="mine-list-item-title-area">
-          <view class="mine-list-item-title-text">我的收藏</view>
+      <block wx:for-items="{{dataList}}" wx:key="{{item.id}}">
+        <view class="mine-list-item" hover-class="item-hover" bindtap="{{item.clickEnvet}}">
+          <view class="mine-list-item-title-area">
+            <text class="mine-list-item-title-text">{{item.title}}</text>
+          </view>
         </view>
-      </view>
-      <view class="mine-list-item" hover-class="item-hover" bindtap="aboutBtnClick">
-        <view class="mine-list-item-title-area">
-          <view class="mine-list-item-title-text">关于我们</view>
-        </view>
-      </view>
+      </block>
     </view>
     <!-- <view class="ad-view-item">
       <ad unit-id="adunit-96607f318ecbc09c"></ad>

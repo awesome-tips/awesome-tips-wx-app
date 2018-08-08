@@ -1,19 +1,54 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+/**
+ * 小程序工具方法
+ */
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+// 弹窗确认复制链接
+function setUrlToClipboard(title, url) {
+  if (url && url.length > 0) {
+    wx.showModal({
+      title: title,
+      content: url,
+      confirmText: '复制链接',
+      success: function (res) {
+        if (res.confirm) {
+          // 点击了确定按钮
+          wx.setClipboardData({
+            data: url,
+            success: function (res) {
+              wx.showToast({
+                icon: 'success',
+                title: '链接已复制'
+              })
+            }
+          })
+        } else if (res.cancel) {
+          // 点击了取消按钮
+        }
+      }
+    })
+  }
 }
 
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+// 文中链接点击
+function onUrlLinkTap(sender) {
+  const url = sender.currentTarget.dataset.url
+  const title = sender.currentTarget.dataset.title
+  setUrlToClipboard(title, url)
+}
+
+// 文中图片点击，浏览大图
+function onImageTap(sender) {
+  const url = sender.currentTarget.dataset.src
+  if (url && url.length > 0) {
+    wx.previewImage({
+      current: url,
+      urls: [url]
+    })
+  }
 }
 
 module.exports = {
-  formatTime: formatTime
+  setUrlToClipboard: setUrlToClipboard,
+  onUrlLinkTap: onUrlLinkTap,
+  onImageTap: onImageTap,
 }

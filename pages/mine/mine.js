@@ -1,7 +1,6 @@
 // pages/mine/mine.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
 
 Page({
 
@@ -11,13 +10,14 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
+    dataList: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    mta.Page.init()
+    app.mta.Page.init()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -33,6 +33,7 @@ Page({
         })
       }
     }
+    this.initDataList()
   },
 
   /**
@@ -63,6 +64,18 @@ Page({
   
   },
 
+  // 初始化页面列表数据源
+  initDataList: function () {
+    let dataList = []
+    dataList.push({ id: 1, title: "我的收藏", clickEnvet: "favorBtnClick" })
+    dataList.push({ id: 2, title: "我的订阅", clickEnvet: "subscribeBtnClick" })
+    dataList.push({ id: 3, title: "意见反馈", clickEnvet: "feedbackBtnClick" })
+    dataList.push({ id: 4, title: "关于我们", clickEnvet: "aboutBtnClick" })
+    this.setData({
+      dataList: dataList,
+    })
+  },
+
   // 点击登录获取微信用户信息
   getUserInfo: function (e) {
     const userInfo = e.detail.userInfo
@@ -77,6 +90,20 @@ Page({
   favorBtnClick: function (event) {
     wx.navigateTo({
       url: '../favorites/favorites'
+    })
+  },
+
+  // 点击我的订阅
+  subscribeBtnClick: function (event) {
+    wx.navigateTo({
+      url: '../subscribe/subscribe'
+    })
+  },
+
+  // 点击意见反馈
+  feedbackBtnClick: function (event) {
+    wx.navigateTo({
+      url: '../feedback/feedback'
     })
   },
 

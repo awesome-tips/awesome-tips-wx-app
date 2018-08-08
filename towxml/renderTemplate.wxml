@@ -144,7 +144,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m1" data="{{item}}"/>
         </block>
@@ -327,7 +327,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m2" data="{{item}}"/>
         </block>
@@ -510,7 +510,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m3" data="{{item}}"/>
         </block>
@@ -693,7 +693,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m4" data="{{item}}"/>
         </block>
@@ -876,7 +876,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m5" data="{{item}}"/>
         </block>
@@ -1059,7 +1059,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m6" data="{{item}}"/>
         </block>
@@ -1242,7 +1242,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m7" data="{{item}}"/>
         </block>
@@ -1425,7 +1425,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m8" data="{{item}}"/>
         </block>
@@ -1608,7 +1608,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m9" data="{{item}}"/>
         </block>
@@ -1791,7 +1791,7 @@
         </block>
     </textarea>
 
-    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
+    <view wx:if="{{item.node === 'element' && item.tag === 'navigator'}}" class="{{item.attr.className}}"width="{{item.attr.width}}"height="{{item.attr.height}}"data-url="{{item.attr.href}}"data-title="{{item.child[0].text}}"src="{{item.attr.src}}"id="{{item.attr.id}}"style="{{item.attr.style}}" bindtap="onUrlLinkTap" >
         <block wx:for="{{item.child}}" wx:key="{{item}}">
             <template is="m9" data="{{item}}"/>
         </block>

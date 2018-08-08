@@ -1,8 +1,6 @@
 // pages/index/index.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
-const feedListUrl = require('../../config.js').feedListUrl
 
 Page({
   // 页面数据
@@ -17,8 +15,7 @@ Page({
 
   // 页面初始化
   onLoad: function (options) {
-    console.log('Index Page On Load With Options:', options)
-    mta.Page.init()
+    app.mta.Page.init()
 
     // 加载首页第一页数据
     wx.showNavigationBarLoading()
@@ -87,17 +84,11 @@ Page({
     self.data.loading = true
 
     // 发起请求
-    wx.request({
-      url: feedListUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedListUrl,
       data: {
         page: self.data.feedPage,
         filter: 'tips',
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Feed list request success', result)

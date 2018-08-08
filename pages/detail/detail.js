@@ -1,9 +1,6 @@
 // detail.js
 
 const app = getApp()
-const mta = require('../../utils/mta_analysis.js')
-const feedDetailUrl = require('../../config').feedDetailUrl
-const feedFavorlUrl = require('../../config').feedFavorlUrl
 
 Page({
 
@@ -24,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    mta.Page.init()
+    app.mta.Page.init()
 
     const fid = options.fid
     if (fid) {
@@ -67,17 +64,10 @@ Page({
     // 标记正在加载中
     self.data.loading = true
 
-    wx.request({
-      url: feedDetailUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedDetailUrl,
       data: {
         fid: self.data.fid,
-        token: app.globalData.token,
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Feed detail request success', result)
@@ -126,8 +116,9 @@ Page({
     }
     let content = feed.content
     if (!content || content.length == 0) {
-      content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看：[' + feed.url + '](' + feed.url + ')'
+      content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看。'
     }
+    content = content + '\r\n\r\n[原文链接](' + feed.url + ')'
     
     let articleData = app.render.toJson(content, contentType)
     self.setData({
@@ -187,18 +178,11 @@ Page({
     self.data.loading = true
 
     const favorValue = self.data.feed.favor == 0 ? 1 : 0
-    wx.request({
-      url: feedFavorlUrl,
-      method: 'GET',
-      dataType: 'json',
+    app.HTTP.GET({
+      url: app.URL.feedFavorlUrl,
       data: {
         fid: self.data.fid,
         favor: favorValue,
-        token: app.globalData.token,
-      },
-      header: {
-        'from': app.globalData.appFrom,
-        'version': app.globalData.appVersion,
       },
       success: function (result) {
         console.log('Feed favor request success', result)
@@ -239,42 +223,10 @@ Page({
     })
   },
 
-  // 复制原文链接（暂时去掉）
-  copyLinkButtonClick: function () {
-    if (this.data.feed) {
-      this.setUrlToClipboard(this.data.feed.url)
-    }
-  },
+  // 文中链接点击
+  onUrlLinkTap: app.util.onUrlLinkTap,
 
-  // 复制文中链接
-  onUrlLinkTap: function (sender) {
-    const url = sender.currentTarget.dataset.url
-    this.setUrlToClipboard(url)
-  },
-
-  // 打开图片浏览
-  onImageTap: function (sender) {
-    const url = sender.currentTarget.dataset.src
-    if (url && url.length > 0) {
-      wx.previewImage({
-        current: url,
-        urls: [url]
-      })
-    }
-  },
-
-  setUrlToClipboard: function (url) {
-    if (url && url.length > 0) {
-      wx.setClipboardData({
-        data: url,
-        success: function (res) {
-          wx.showToast({
-            icon: 'success',
-            title: '链接已复制'
-          })
-        }
-      })
-    }
-  },
+  // 文中图片点击，浏览大图
+  onImageTap: app.util.onImageTap,
 
 })
