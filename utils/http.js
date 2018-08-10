@@ -2,11 +2,9 @@
  * 小程序 HTTP 请求封装
  */
 
-const appFrom = 'wxapp'
-const appVersion = '1.2.0'
-
 const HTTP = {
   token: null,
+  version: '1.2.0',
   
   GET: function(request) {
     var self = this
@@ -14,8 +12,8 @@ const HTTP = {
       url: request.url,
       data: request.data,
       header: {
-        'from': appFrom,
-        'version': appVersion,
+        'from': 'wxapp',
+        'version': self.version,
         'token': self.token
       },
       method: 'GET',
@@ -33,8 +31,8 @@ const HTTP = {
       url: request.url,
       data: request.data,
       header: {
-        'from': appFrom,
-        'version': appVersion,
+        'from': 'wxapp',
+        'version': self.version,
         'content-type': 'application/x-www-form-urlencoded',
         'token': self.token
       },

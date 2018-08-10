@@ -21,5 +21,8 @@
     <!-- <view class="ad-view-item">
       <ad unit-id="adunit-96607f318ecbc09c"></ad>
     </view> -->
+    <view class="mine-app-version-area">
+      <text class="mine-app-version-text">v{{appVersion}}</text>
+    </view>
   </view>
 </view>

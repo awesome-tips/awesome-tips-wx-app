@@ -1,1 +1,199 @@
-/* pages/discover/discover.wxss */
+@import "../../utils/font.wxss";
+@import "../../utils/common.wxss";
+
+.home {
+  overflow-x: hidden;
+}
+
+.home .head {
+  margin: 22rpx 40rpx;
+}
+
+.home .box-name {
+  margin: 0 30rpx;
+  font-weight: 600;
+  font-size: 32rpx;
+  z-index: 100;
+  position: relative;
+  color: #616161;
+}
+
+.home .box-number {
+  font-size: 100rpx;
+  position: absolute;
+  font-family: DINPro;
+  line-height: 100rpx;
+  right: 30rpx;
+  bottom: -35rpx;
+  z-index: 1;
+  color: #efefef;
+}
+
+.home .box-bg-shadow {
+  border-radius: 6rpx;
+  background: #fffefc;
+  border: 1rpx solid rgba(13,25,40,0.25); /* 1rpx border 会让整个 View 左右共增加 4rpx (2px) 宽度 */
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}
+
+.home .box-bg-shadow-hover {
+  transform: scale(.95);
+  transition: all 200ms;
+  box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
+}
+
+/* 组合一 */
+.home .box1 {
+  margin: 0 40rpx;
+  margin-top: 40rpx;
+  overflow: hidden;
+}
+
+.home .box1>view {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+
+.home .box1-1 {
+  height: 150rpx;
+  width: 391rpx;
+  margin-right: 22rpx;
+}
+ 
+.home .box1-2 {
+  height: 150rpx;
+  width: 251rpx;
+}
+
+.home .box1-3 {
+  height: 120rpx;
+  width: 291rpx;
+  margin-right: 22rpx;
+}
+
+.home .box1-4 {
+  height: 190rpx;
+  width: 351rpx;
+}
+
+.home .box1-5 {
+  height: 190rpx;
+  width: 291rpx;
+  margin-top: -70rpx;
+  margin-right: 22rpx;
+}
+
+.home .box1-6 {
+  height: 120rpx;
+  width: 351rpx;
+}
+
+/* 组合二 */
+.home .box2 {
+  margin: 0 40rpx;
+  margin-top: 40rpx;
+  overflow: hidden;
+}
+
+.home .box2>view {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+
+.home .box2-1 {
+  height: 110rpx;
+  width: 665rpx;
+}
+
+.home .box2-2 {
+  height: 110rpx;
+  width: 321rpx;
+  margin-right: 22rpx;
+}
+
+.home .box2-3 {
+  height: 110rpx;
+  width: 321rpx;
+}
+
+.home .box2-4 {
+  height: 110rpx;
+  width: 321rpx;
+  margin-right: 22rpx;
+}
+
+.home .box2-5 {
+  height: 110rpx;
+  width: 321rpx;
+}
+
+/* 组合三 */
+.home .box3 {
+  margin: 0 40rpx;
+  margin-top: 40rpx;
+  overflow: hidden;
+}
+
+.home .box3>view {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+
+.home .box3-1 {
+  height: 150rpx;
+  width: 251rpx;
+  margin-right: 22rpx;
+}
+
+.home .box3-2 {
+  height: 150rpx;
+  width: 391rpx;
+}
+
+.home .box3-3 {
+  height: 110rpx;
+  width: 291rpx;
+  margin-right: 22rpx;
+}
+
+.home .box3-4 {
+  height: 190rpx;
+  width: 351rpx;
+}
+
+.home .box3-5 {
+  height: 190rpx;
+  width: 291rpx;
+  margin-right: 22rpx;
+  margin-top: -80rpx;
+}
+
+.home .box3-6 {
+  height: 110rpx;
+  width: 351rpx;
+}
+
+.home .ad-view-area {
+  margin: 40rpx 42rpx;
+  border-radius: 6rpx;
+}
+
+.home .ad-view-area .ad-view {
+  border-radius: 6rpx;
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}

@@ -11,9 +11,6 @@ const towxml = require('./towxml/main.js')
 App({
   // 全局数据
   globalData: {
-    appFrom: 'wxapp',
-    appVersion: '1.2.0',
-    token: null,
     openId: null,
     userInfo: null,
     hasLogined: false,
@@ -108,7 +105,6 @@ App({
       wx.checkSession({
         success: function () {
           // 服务端 session_key 未过期，并且在本生命周期一直有效
-          self.globalData.token = token
           self.HTTP.token = token
           self.globalData.openId = openId
           self.globalData.hasLogined = true
@@ -164,7 +160,6 @@ App({
                   key: 'openId',
                   data: openId
                 })
-                self.globalData.token = token
                 self.HTTP.token = token
                 self.globalData.openId = openId
                 self.globalData.hasLogined = true
@@ -260,8 +255,7 @@ App({
 
   reLoginThenCallback: function (callback) {
     console.log('登录失效，重新登录')
-    this.globalData.token = null
-    this.HTTP.token = token
+    this.HTTP.token = null
     this.globalData.hasLogined = false
     this.loginReadyCallbacks = []
     this.addLoginReadyCallback(callback)

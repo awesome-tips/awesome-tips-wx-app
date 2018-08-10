@@ -53,3 +53,15 @@
   color: #515151;
   font-size: 32rpx;
 }
+
+.mine-app-version-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30rpx 30rpx;
+}
+
+.mine-app-version-text {
+  color: #bfbfbf;
+  font-size: 26rpx;
+}

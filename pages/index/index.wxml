@@ -1,8 +1,7 @@
 <import src="/utils/template.wxml"/>
 <view>
   <view class="page-head">
-    <image class="index-search-image" src="/assets/search.png" bindtap="searchBtnClick"></image>
-    <view class="index-tips-text">{{tipsText}}</view>
+    <navigator class="page-top-button" hover-class="page-top-button-hover" url="../search/search">搜索小集</navigator>
   </view>
   <view class="page-body">
     <template is="feed-list-template" data="{{feedList}}"/>

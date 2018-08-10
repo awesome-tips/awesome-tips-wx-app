@@ -1,7 +1,8 @@
 @import "../../utils/common.wxss";
 
-.page-body {
-  padding-top: 0;
+.page-head {
+  padding: 0;
+  margin: 22rpx 40rpx;
 }
 
 .index-search-image {

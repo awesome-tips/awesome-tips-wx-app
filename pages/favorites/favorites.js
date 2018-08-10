@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('Favorites Page OnLoad')
     app.mta.Page.init()
   },
 
@@ -26,13 +27,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    console.log('Favorites Page OnReady')
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('Favorites Page OnShow')
     // 重新加载第一页数据
     wx.showNavigationBarLoading()
     this.data.canLoadMore = true
@@ -44,14 +46,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    console.log('Favorites Page OnHide')
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    console.log('Favorites Page OnUnload')
   },
 
   /**
