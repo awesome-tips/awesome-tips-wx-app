@@ -5,12 +5,12 @@ const app = getApp()
 Page({
   // 页面数据
   data: {
-    tipsText: '每天更新，专注于 iOS 知识分享',
     loading: false,
     canLoadMore: true,
     showBottomLoading: false,
     feedPage: 1,
-    feedList: []
+    feedList: [],
+    topButton: null,
   },
 
   // 页面初始化
@@ -98,6 +98,13 @@ Page({
             let newFeedList = []
             if (self.data.feedPage == 1) {
               // feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
+              // 解析首页顶部按钮点击
+              let topButton = result.data.data.topButton
+              if (topButton) {
+                self.setData({
+                  topButton: topButton
+                })
+              }
             } else {
               newFeedList = newFeedList.concat(self.data.feedList)
             }

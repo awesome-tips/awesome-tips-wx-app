@@ -2,6 +2,7 @@
  * 小程序配置文件（目前只有接口 URL 地址）
  */
 
+// const apiHost = "http://localhost/AwesomeTips/api"
 const apiHost = "https://tips.kangzubin.com/api"
 
 const config = {
@@ -19,6 +20,8 @@ const config = {
   userLoginUrl: `${apiHost}/user/login`,
   // 更新用户信息
   userUpdateUrl: `${apiHost}/user/update`,
+  // 发现页数据
+  discoverIndexUrl: `${apiHost}/discover/index`,
 }
 
 module.exports = config

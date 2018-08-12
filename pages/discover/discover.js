@@ -8,15 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageHide: true,
+    loading: false,
+    topButton: null,
     dataList: [],
-    boxIndex: {
-      0: "one",
-      1: "two",
-      2: "three",
-      3: "four",
-      4: "five",
-      5: "six"
-    },
   },
 
   /**
@@ -24,175 +19,145 @@ Page({
    */
   onLoad: function (options) {
     app.mta.Page.init()
-    this.init()
+    wx.showNavigationBarLoading()
+
+    const self = this
+
+    let topButton = wx.getStorageSync('discover-topButton')
+    let dataList = wx.getStorageSync('discover-dataList')
+    if (topButton && dataList) {
+      self.setData({
+        topButton: topButton,
+        dataList: dataList,
+        pageHide: false
+      })
+      setTimeout(function () {
+        self.getDiscoverData()
+      }, 500)
+    } else {
+      self.getDiscoverData()
+    }
   },
 
-  init: function() {
+  getDiscoverData: function() {
     const self = this
-    
-    let result = [
-      {
-        "id": 1,
-        "name": "微博一周推送",
-        "number": "139",
-      },
-      {
-        "id": 2,
-        "name": "简报",
-        "number": "445",
-      },
-      {
-        "id": 3,
-        "name": "英文版",
-        "number": "15",
-      },
-      {
-        "id": 4,
-        "name": "iOS 知识小集合集",
-        "number": "25",
-      },
-      {
-        "id": 5,
-        "name": "公众号文章",
-        "number": "20",
-      },
-      {
-        "id": 6,
-        "name": "更多小集",
-        "number": "666",
-      },
-      {
-        "id": 7,
-        "name": "猿小荐：专注于移动开发职位分享",
-        "number": "",
-      },
-      {
-        "id": 8,
-        "name": "React Native",
-        "number": "12",
-      },
-      {
-        "id": 9,
-        "name": "Weex",
-        "number": "8",
-      },
-      {
-        "id": 10,
-        "name": "Flutter",
-        "number": "4",
-      },
-      {
-        "id": 11,
-        "name": "微信小程序",
-        "number": "6",
-      },
-      {
-        "id": 12,
-        "name": "比较三种网络框架上传图片过程中的不同点",
-        "number": "61",
-      },
-      {
-        "id": 13,
-        "name": "通过 runtime 控制导航栏的 hidden 属性",
-        "number": "143",
-      },
-      {
-        "id": 14,
-        "name": "关于 IAP 丢单的处理",
-        "number": "223",
-      },
-      {
-        "id": 15,
-        "name": "iOS App 的反调试（Anti-Debug）",
-        "number": "1345",
-      },
-      {
-        "id": 16,
-        "name": "如何快速定位哪个 View 出现了约束警告？",
-        "number": "32",
-      },
-      {
-        "id": 17,
-        "name": "聊聊 AutoLayout 的一对属性",
-        "number": "124",
-      },
-    ]
 
-    result.map(function (item, intex) {
-      switch (intex) {
-        case 0:
-          item.name = self.stringCut(item.name, 23)
-          break;
-        case 1:
-          item.name = self.stringCut(item.name, 13)
-          break;
-        case 2:
-          item.name = self.stringCut(item.name, 8)
-          break;
-        case 3:
-          item.name = self.stringCut(item.name, 28)
-          break;
-        case 4:
-          item.name = self.stringCut(item.name, 22)
-          break;
-        case 5:
-          item.name = self.stringCut(item.name, 10)
-          break;
-        case 6:
-          item.name = self.stringCut(item.name, 21)
-          break;
-        case 7:
-          item.name = self.stringCut(item.name, 12)
-          break;
-        case 8:
-          item.name = self.stringCut(item.name, 9)
-          break;
-        case 9:
-          item.name = self.stringCut(item.name, 28)
-          break;
-        case 10:
-          item.name = self.stringCut(item.name, 25)
-          break;
-        case 11:
-          item.name = self.stringCut(item.name, 13)
-          break;
-        case 12:
-          item.name = self.stringCut(item.name, 23)
-          break;
-        case 13:
-          item.name = self.stringCut(item.name, 8)
-          break;
-        case 14:
-          item.name = self.stringCut(item.name, 28)
-          break;
-        case 15:
-          item.name = self.stringCut(item.name, 22)
-          break;
-        case 16:
-          item.name = self.stringCut(item.name, 19)
-          break;
+    if (self.data.loading) {
+      return
+    }
+
+    self.data.loading = true
+
+    app.HTTP.GET({
+      url: app.URL.discoverIndexUrl,
+      success: function (result) {
+        console.log('Discover data request success', result)
+        if (result.data.code == 0) {
+          let topButton = result.data.data.topButton
+          if (topButton) {
+            self.setData({
+              topButton: topButton
+            })
+            wx.setStorage({
+              key: 'discover-topButton',
+              data: topButton
+            })
+          }
+          let dataList = result.data.data.dataList
+          if (dataList && dataList.length > 0) {
+            self.setDataList(dataList)
+          }
+          self.setData({
+            pageHide: false
+          })
+        }
+      },
+      fail: function (errMsg) {
+        console.log('Discover data request fail', errMsg)
+      },
+      complete: function () {
+        self.data.loading = false
+        wx.stopPullDownRefresh()
+        wx.hideNavigationBarLoading()
       }
     })
-
-    var tempList = []
-    var a = result.splice(0, 6)
-    tempList.push(a)
-
-    if (result.length > 0) {
-      var b = result.splice(0, 5)
-      tempList.push(b)
-    }
-    if (result.length > 0) {
-      tempList.push(result)
-    }
-    self.setData({
-      dataList: tempList
-    })
-
   },
 
-  stringCut: function (t, e) {
-    return t.length > e && (t = t.substring(0, e - 2) + "..."), t;
+  setDataList: function(dataList) {
+    const self = this
+    if (dataList.length >= 3) {
+      // 推荐小集的标题过长裁剪
+      let box3 = dataList[2]
+      box3.map(function (item, intex) {
+        switch (intex) {
+          case 0:
+            item.name = self.stringCut(item.name, 10)
+            break;
+          case 1:
+            item.name = self.stringCut(item.name, 20)
+            break;
+          case 2:
+            item.name = self.stringCut(item.name, 7)
+            break;
+          case 3:
+            item.name = self.stringCut(item.name, 22)
+            break;
+          case 4:
+            item.name = self.stringCut(item.name, 21)
+            break;
+          case 5:
+            item.name = self.stringCut(item.name, 13)
+            break;
+          default:
+            break
+        }
+      })
+      dataList[2] = box3
+    }
+
+    self.setData({
+      dataList: dataList
+    })
+
+    wx.setStorage({
+      key: 'discover-dataList',
+      data: dataList
+    })
+  },
+
+  stringCut: function (str, limit) {
+    return (str.length > limit) && (str = str.substring(0, limit - 1) + "..."), str;
+  },
+
+  onBoxItemClick: function (event) {
+    const item = event.currentTarget.dataset.boxitem
+    if (item) {
+      if (item.type == 'filter') {
+        if (item.filter && item.filter.length > 0) {
+          wx.navigateTo({
+            url: '../filter/filter?filter=' + item.filter + '&title=' + item.name
+          })
+        }
+      } else if (item.type == 'page') {
+        if (item.url && item.url.length > 0) {
+          wx.navigateTo({
+            url: item.url
+          })
+        }
+      } else if (item.type == 'app') {
+        if (item.appid && item.appid.length > 0) {
+          wx.navigateToMiniProgram({
+            appId: item.appid
+          })
+        }
+      } else if (item.type == 'tips') {
+        if (item.fid && item.fid.length > 0) {
+          wx.navigateTo({
+            url: '../detail/detail?fid=' + item.fid
+          })
+        }
+      }
+    }
   },
 
   /**
@@ -228,8 +193,11 @@ Page({
    */
   onPullDownRefresh: function () {
     const self = this
+    if (self.data.loading) {
+      return
+    }
     setTimeout(function () {
-      wx.stopPullDownRefresh()
+      self.getDiscoverData()
     }, 1000)
   },
 

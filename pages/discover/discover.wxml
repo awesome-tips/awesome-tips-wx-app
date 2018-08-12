@@ -1,9 +1,9 @@
-<view class="home">
+<view wx:if="{{!pageHide}}" class="home">
   <view class="head">
-    <navigator class="page-top-button" hover-class="page-top-button-hover" url="../search/search">搜索小集</navigator>
+    <navigator class="page-top-button" hover-class="page-top-button-hover" target="{{topButton.target}}" app-id="{{topButton.appid}}" url="{{topButton.url}}">{{topButton.title}}</navigator>
   </view>
   <view class="box{{i%3+1}}" wx:for="{{dataList}}" wx:for-index="i" wx:key="{{i}}">
-    <view class="box{{i%3+1}}-{{ii+1}} box-bg-shadow" hover-class="box-bg-shadow-hover" wx:for="{{item}}" wx:for-index="ii" wx:key="{{ii}}">
+    <view class="box{{i%3+1}}-{{ii+1}} box-bg-shadow" hover-class="box-bg-shadow-hover" wx:for="{{item}}" wx:for-index="ii" wx:key="{{ii}}" data-boxitem="{{item}}" bindtap="onBoxItemClick">
       <text class="box-name">{{item.name}}</text>
       <text class="box-number">{{item.number}}</text>
     </view>

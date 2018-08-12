@@ -8,6 +8,7 @@ function setUrlToClipboard(title, url) {
     wx.showModal({
       title: title,
       content: url,
+      cancelText: '关闭',
       confirmText: '复制链接',
       success: function (res) {
         if (res.confirm) {

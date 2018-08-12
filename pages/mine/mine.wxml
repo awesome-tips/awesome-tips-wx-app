@@ -1,8 +1,8 @@
 <view>
   <view class="page-head">
-    <view class="userinfo">
-      <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 关联微信 </button>
-      <block wx:else>
+    <button wx:if="{{!hasUserInfo}}" class="page-top-button" hover-class="page-top-button-hover" open-type="getUserInfo" bindgetuserinfo="getUserInfo">关联微信</button>
+    <view wx:else class="userinfo">
+      <block>
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       </block>
@@ -10,6 +10,7 @@
   </view>
   <view class="page-body">
     <view class="mine-list">
+      <!-- 我的页列表项 -->
       <block wx:for-items="{{dataList}}" wx:key="{{item.id}}">
         <view class="mine-list-item" hover-class="item-hover" bindtap="{{item.clickEnvet}}">
           <view class="mine-list-item-title-area">
@@ -17,10 +18,16 @@
           </view>
         </view>
       </block>
+      <!-- 意见反馈按钮 -->
+      <view class="mine-list-item" hover-class="item-hover">
+        <button class="mine-feedback-button" open-type="feedback">意见反馈</button>
+      </view>
     </view>
+    <!-- 广告暂时不展示 -->
     <!-- <view class="ad-view-item">
       <ad unit-id="adunit-96607f318ecbc09c"></ad>
     </view> -->
+    <!-- 底部显示版本号 -->
     <view class="mine-app-version-area">
       <text class="mine-app-version-text">v{{appVersion}}</text>
     </view>

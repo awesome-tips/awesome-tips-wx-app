@@ -7,9 +7,7 @@
     "pages/favorites/favorites",
     "pages/about/about",
     "pages/discover/discover",
-    "pages/subscribe/subscribe",
-    "pages/feedback/feedback",
-    "pages/more/more"
+    "pages/filter/filter"
   ],
   "tabBar": {
     "color": "#cdcdcd",

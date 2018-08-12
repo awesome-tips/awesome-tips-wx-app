@@ -1,5 +1,20 @@
 @import "../../utils/common.wxss";
 
+.page-head {
+  padding: 0;
+  margin: 22rpx 40rpx;
+}
+
+.page-top-button {
+  width: 304rpx;
+  height: 84rpx;
+  border-radius: 42rpx;
+}
+
+.page-top-button::after {
+  border: none;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -64,4 +79,18 @@
 .mine-app-version-text {
   color: #bfbfbf;
   font-size: 26rpx;
+}
+
+.mine-feedback-button {
+  font-size: 32rpx;
+  line-height: 44rpx;
+  color: #515151;
+  background-color: #fffefc;
+  overflow: hidden;
+  text-align: left;
+  padding: 30rpx;
+}
+
+.mine-feedback-button::after {
+  border: none;
 }

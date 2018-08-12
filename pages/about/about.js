@@ -21,6 +21,16 @@ Page({
   onLoad: function (options) {
     app.mta.Page.init()
 
+    let title = '关于我们'
+    let tp = options.type
+    if (tp && tp == 'more') {
+      this.data.fid = 269
+      title = '更多小集'
+    }
+    wx.setNavigationBarTitle({
+      title: title,
+    })
+
     wx.showLoading({
       icon: 'loading'
     })

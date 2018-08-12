@@ -1,8 +1,5 @@
 <import src="/utils/template.wxml"/>
 <view>
-  <view class="page-head">
-    <navigator wx:if="{{topButton}}" class="page-top-button" hover-class="page-top-button-hover" target="{{topButton.target}}" app-id="{{topButton.appid}}" url="{{topButton.url}}">{{topButton.title}}</navigator>
-  </view>
   <view class="page-body">
     <template is="feed-list-template" data="{{feedList}}"/>
     <view class="bottom-loading-container" wx:if="{{showBottomLoading}}">
