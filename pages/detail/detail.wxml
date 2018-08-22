@@ -13,7 +13,7 @@
   </view>
 </view>
 
-<button class="go-home-button" hover-class="go-home-button-shadow-hover" style="bottom:{{isIPX ? 98 : 64}}px;" bindtap="onGoHome">
+<button wx:if="{{!pageHide && fromShare}}" class="go-home-button" hover-class="go-home-button-shadow-hover" style="bottom:{{isIPX ? 98 : 64}}px;" bindtap="onGoHome">
   <image src="/assets/icon_Index_HL.png"></image>
 </button>
 
