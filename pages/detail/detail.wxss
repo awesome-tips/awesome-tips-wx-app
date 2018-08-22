@@ -80,3 +80,27 @@
 button::after {
   border: none;
 }
+
+.go-home-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 15px;
+  width: 120rpx;
+  height: 120rpx;
+  opacity: 0.90;
+  border-radius: 60rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 40rpx rgba(0,0,0,0.2);
+}
+
+.go-home-button-shadow-hover {
+  transform: scale(.90);
+  transition: all 200ms;
+}
+
+.go-home-button image {
+    width: 60rpx;
+    height: 60rpx;
+}

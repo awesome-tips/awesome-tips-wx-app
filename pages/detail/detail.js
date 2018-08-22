@@ -12,6 +12,7 @@ Page({
     feed: null,
     loading: false,
     pageHide: true,
+    fromShare: false,
     favorTitle: '收藏',
     isIPX: app.globalData.isIPX,
     article: {}
@@ -23,11 +24,12 @@ Page({
   onLoad: function (options) {
     app.mta.Page.init()
 
-    const fid = options.fid
-    if (fid) {
-      this.setData({
-        fid: fid
-      })
+    if (options.from && options.from == 'share') {
+      this.data.fromShare = true
+    }
+
+    if (options.fid) {
+      this.data.fid = options.fid
 
       wx.showLoading({
         icon: 'loading'
@@ -123,7 +125,8 @@ Page({
     let articleData = app.render.toJson(content, contentType)
     self.setData({
       article: articleData,
-      pageHide: false
+      pageHide: false,
+      fromShare: self.data.fromShare
     })
     wx.hideLoading()
   },
@@ -149,7 +152,7 @@ Page({
     const self = this
     if (self.data.feed) {
       const title = self.data.feed.title
-      const path = 'pages/index/index?from=share&fid=' + self.data.feed.fid
+      const path = 'pages/detail/detail?from=share&fid=' + self.data.feed.fid
       return {
         title: title,
         path: path,
@@ -228,5 +231,12 @@ Page({
 
   // 文中图片点击，浏览大图
   onImageTap: app.util.onImageTap,
+
+  // 跳转到主页
+  onGoHome: function() {
+    wx.reLaunch({
+      url: "/pages/index/index"
+    });
+  }
 
 })
