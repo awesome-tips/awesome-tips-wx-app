@@ -1,0 +1,66 @@
+.feed-list {
+  width: 100%;
+}
+
+.feed-list .item {
+  margin: 25rpx 0;
+  background-color: #fffefc;
+  border-radius: 6rpx;
+  overflow: hidden;
+  border: 1rpx solid rgba(13,25,40,0.25);
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}
+
+.feed-list .item:first-child {
+  margin-top: 0;
+}
+
+.feed-list .item:last-child {
+  margin-bottom: 0;
+}
+
+.feed-list .item-hover {
+  box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
+  transform: scale(.95);
+  transition: all 200ms;
+}
+
+.feed-list .item .title {
+  padding: 45rpx 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+}
+
+.feed-list .item .title .text {
+  color: #515151;
+  font-size: 32rpx;
+}
+
+.feed-list .item .subtitle {
+  padding: 10rpx 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+  background-color: #f9f9f9;
+}
+
+.feed-list .item .subtitle .text {
+  color: #bfbfbf;
+  font-size: 22rpx;
+}
+
+.feed-list .ad-item {
+  margin: 25rpx 1rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}
+
+.feed-list .ad-item:first-child {
+  margin-top: 0;
+}
+
+.feed-list .ad-item:last-child {
+  margin-bottom: 0;
+}

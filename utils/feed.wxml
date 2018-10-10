@@ -1,0 +1,17 @@
+<template name="feed-template">
+  <view class="feed-list">
+    <block wx:for-items="{{feedList}}" wx:key="{{item.fid}}">
+      <view wx:if="{{item.fid == -1}}" class="ad-item">
+        <ad unit-id="adunit-643e6c06be88b2c5"></ad>
+      </view>
+      <view wx:else id="{{item.fid}}" class="item" hover-class="item-hover" data-feed="{{item}}" bindtap="feedItemClick">
+        <view class="title">
+          <view class="text">{{item.title}}</view>
+        </view>
+        <view class="subtitle">
+          <view class="text">{{item.postdate}} @{{item.author}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

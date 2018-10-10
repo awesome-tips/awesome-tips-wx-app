@@ -8,18 +8,17 @@
 }
 
 .page-top-button {
-  width: 300rpx;
-  height: 80rpx;
+  width: 304rpx;
+  height: 84rpx;
   margin: 22rpx auto;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 42rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30rpx;
-  line-height: 30rpx;
-  font-weight: 600;
   color: #616161;
   background: #fffefc;
-  border-radius: 40rpx;
   border: 1rpx solid rgba(13,25,40,0.25);
   box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }

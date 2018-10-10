@@ -1,17 +1,1 @@
-@import "../../utils/common.wxss";
-
-.page-head {
-  padding: 0;
-  margin: 22rpx 40rpx;
-}
-
-.index-search-image {
-  width: 60rpx;
-  height: 60rpx;
-}
-
-.index-tips-text {
-  color: #bfbfbf;
-  margin-top: 10rpx;
-  font-size: 28rpx;
-}
+@import "/utils/feed.wxss";

@@ -1,6 +1,49 @@
 page {
-  height: 100%;
-  width: 100%;
-  font-size: 32rpx;
   background-color: #f0f0f0;
+}
+
+page .head {
+  padding: 0;
+  margin: 22rpx 25rpx;
+}
+
+page .head .top-button {
+  width: 304rpx;
+  height: 84rpx;
+  margin: 22rpx auto;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 42rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #616161;
+  background: #fffefc;
+  border: 1rpx solid rgba(13,25,40,0.25);
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}
+
+page .head .top-button-hover {
+  transform: scale(.95);
+  transition: all 200ms;
+  box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
+}
+
+page .body {
+  padding: 25rpx;
+}
+
+page .bottom {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25rpx;
+}
+
+page .bottom .loading {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+button::after {
+  border: none;
 }

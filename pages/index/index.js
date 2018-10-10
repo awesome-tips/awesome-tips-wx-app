@@ -10,26 +10,23 @@ Page({
     showBottomLoading: false,
     feedPage: 1,
     feedList: [],
-    topButton: null,
   },
 
   // 页面初始化
   onLoad: function (options) {
+    const self = this
+
     app.mta.Page.init()
-
-    // 加载首页第一页数据
     wx.showNavigationBarLoading()
-    this.data.feedPage = 1
-    this.getFeedList()
 
-    // 从分享的群消息点进来，跳转到详情页
-    if (options.from && options.from == 'share') {
-      if (options.fid) {
-        wx.hideNavigationBarLoading()
-        wx.navigateTo({
-          url: '../detail/detail?fid=' + options.fid
-        })
-      }
+    if (app.globalData.hasLogined) {
+      // 已登录
+      self.getFeedList()
+    } else {
+      // 未登录延迟加载
+      app.addLoginReadyCallback(function () {
+        self.getFeedList()
+      })
     }
   },
 
@@ -41,8 +38,8 @@ Page({
       return
     }
     setTimeout(function () {
-      self.data.canLoadMore = true
       self.data.feedPage = 1
+      self.data.canLoadMore = true
       self.getFeedList()
     }, 1000)
   },
@@ -68,6 +65,11 @@ Page({
 
   getFeedList: function () {
     const self = this
+
+    if (!app.globalData.hasLogined) {
+      // 未登录，直接返回
+      return
+    }
 
     if (self.data.loading) {
       // 正在加载中，直接返回
@@ -98,13 +100,6 @@ Page({
             let newFeedList = []
             if (self.data.feedPage == 1) {
               // feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
-              // 解析首页顶部按钮点击
-              let topButton = result.data.data.topButton
-              if (topButton) {
-                self.setData({
-                  topButton: topButton
-                })
-              }
             } else {
               newFeedList = newFeedList.concat(self.data.feedList)
             }
@@ -140,9 +135,8 @@ Page({
   closeLoadingView: function () {
     wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
-    const self = this
-    if (self.data.showBottomLoading) {
-      self.setData({
+    if (this.data.showBottomLoading) {
+      this.setData({
         showBottomLoading: false
       })
     }
@@ -173,5 +167,16 @@ Page({
       imageUrl: 'https://tips.kangzubin.com/share.jpg'
     }
   },
+
+  subscribeSubmit: function (event) {
+    const formId = event.detail.formId
+    if (formId) {
+      console.log(formId)
+      wx.showToast({
+        title: formId,
+        icon: 'none',
+      })
+    }
+  }
 
 })

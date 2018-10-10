@@ -7,21 +7,23 @@ const apiHost = "https://tips.kangzubin.com/api"
 
 const config = {
   // 列表
-  feedListUrl: `${apiHost}/feed/list`,
+  feedListUrl:        `${apiHost}/feed/list`,
   // 搜索
-  feedSearchUrl: `${apiHost}/feed/search`,
+  feedSearchUrl:      `${apiHost}/feed/search`,
   // 详情
-  feedDetailUrl: `${apiHost}/feed/detail`,
+  feedDetailUrl:      `${apiHost}/feed/detail`,
   // 收藏操作
-  feedFavorlUrl: `${apiHost}/feed/favor`,
+  feedFavorlUrl:      `${apiHost}/feed/favor`,
   // 收藏列表
-  feedFavorListUrl: `${apiHost}/feed/favorList`,
+  feedFavorListUrl:   `${apiHost}/feed/favorList`,
   // 用户登录
-  userLoginUrl: `${apiHost}/user/login`,
+  userLoginUrl:       `${apiHost}/user/login`,
   // 更新用户信息
-  userUpdateUrl: `${apiHost}/user/update`,
+  userUpdateUrl:      `${apiHost}/user/update`,
   // 发现页数据
-  discoverIndexUrl: `${apiHost}/discover/index`,
+  discoverIndexUrl:   `${apiHost}/discover/index`,
+  // 订阅小集操作
+  pushOpenWxUrl:      `${apiHost}/push/openWx`,
 }
 
 module.exports = config
