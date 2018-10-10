@@ -13,6 +13,10 @@
   </view>
 </view>
 
+<button wx:if="{{!pageHide && fromShare}}" class="go-home-button" hover-class="go-home-button-shadow-hover" style="bottom:{{isIPX ? 98 : 64}}px;" bindtap="onGoHome">
+  <image src="/assets/icon_Index_HL.png"></image>
+</button>
+
 <view wx:if="{{!pageHide}}" class="{{isIPX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}">
   <button class="feed-bottom-btn-view feed-btn-left" bindtap="favorButtonClick">{{favorTitle}}</button>
   <button class="feed-bottom-btn-view feed-btn-right" open-type="share">转发</button>

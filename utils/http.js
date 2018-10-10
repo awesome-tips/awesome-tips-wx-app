@@ -7,7 +7,7 @@ const HTTP = {
   version: '1.2.0',
   
   GET: function(request) {
-    var self = this
+    const self = this
     wx.request({
       url: request.url,
       data: request.data,
@@ -26,7 +26,7 @@ const HTTP = {
   },
 
   POST: function(request) {
-    var self = this
+    const self = this
     wx.request({
       url: request.url,
       data: request.data,
