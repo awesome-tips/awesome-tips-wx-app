@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     dataList: null,
-    appVersion: app.HTTP.version
+    appVersion: app.version
   },
 
   /**
@@ -69,9 +69,8 @@ Page({
   initDataList: function () {
     let dataList = []
     dataList.push({ id: 1, title: "我的收藏", clickEnvet: "favorBtnClick" })
-    // dataList.push({ id: 2, title: "我的订阅", clickEnvet: "subscribeBtnClick" })
-    // dataList.push({ id: 3, title: "意见反馈", clickEnvet: "feedbackBtnClick" })
-    dataList.push({ id: 4, title: "关于我们", clickEnvet: "aboutBtnClick" })
+    dataList.push({ id: 2, title: "订阅管理", clickEnvet: "subscribeBtnClick" })
+    dataList.push({ id: 3, title: "关于我们", clickEnvet: "aboutBtnClick" })
     this.setData({
       dataList: dataList,
     })
@@ -95,18 +94,11 @@ Page({
   },
 
   // 点击我的订阅
-  // subscribeBtnClick: function (event) {
-  //   wx.navigateTo({
-  //     url: '../subscribe/subscribe'
-  //   })
-  // },
-
-  // 点击意见反馈
-  // feedbackBtnClick: function (event) {
-  //   wx.navigateTo({
-  //     url: '../feedback/feedback'
-  //   })
-  // },
+  subscribeBtnClick: function (event) {
+    wx.navigateTo({
+      url: '../subscribe/subscribe'
+    })
+  },
 
   // 点击关于我们
   aboutBtnClick: function (event) {

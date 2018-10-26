@@ -5,11 +5,11 @@ const app = getApp()
 Page({
   // 页面数据
   data: {
-    loading: false,
-    canLoadMore: true,
-    showBottomLoading: false,
-    feedPage: 1,
-    feedList: [],
+    loading: false, // 是否正在加载中
+    canLoadMore: true, // 是否能加载更多
+    showBottomLoading: false, // 是否显示底部加载视图
+    feedPage: 1,  // 列表页数
+    feedList: [], // 列表数据
   },
 
   // 页面初始化
@@ -37,6 +37,7 @@ Page({
       // 正在加载中，直接返回
       return
     }
+    // 这里延迟 1 秒再发起请求，避免下拉动画一闪而过
     setTimeout(function () {
       self.data.feedPage = 1
       self.data.canLoadMore = true
@@ -55,9 +56,11 @@ Page({
       // 不能加载更多，直接返回
       return
     }
+    // 显示底部加载动画
     self.setData({
       showBottomLoading: true
     })
+    // 同样的，这里延迟 1 秒再发起请求，避免底部动画一闪而过
     setTimeout(function () {
       self.getFeedList()
     }, 1000)
@@ -94,30 +97,28 @@ Page({
       },
       success: function (result) {
         console.log('Feed list request success', result)
-        if (result.data.code == 0) { // 接口请求成功
-          let feeds = result.data.data.feeds
-          if (feeds && feeds.length > 0) { // 如果有返回数据
-            let newFeedList = []
-            if (self.data.feedPage == 1) {
-              // feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
-            } else {
-              newFeedList = newFeedList.concat(self.data.feedList)
-            }
-            newFeedList = newFeedList.concat(feeds)
-            // newFeedList.push({fid:-1}) // 每一页末尾插入一条广告
-            const newFeedPage = self.data.feedPage + 1
-            self.setData({
-              feedPage: newFeedPage,
-              feedList: newFeedList
-            })
+        let feeds = result.data.feeds
+        if (feeds && feeds.length > 0) { // 如果有返回数据
+          let newFeedList = []
+          if (self.data.feedPage == 1) {
+            // feeds.splice(2, 0, {fid:-1}) // 第一页的第 3 条数据插入广告
           } else {
-            // 标记不能加载更多了
-            self.data.canLoadMore = false
-            wx.showToast({
-              icon: 'none',
-              title: '总共有 ' + self.data.feedList.length + ' 条小集，没有更多了'
-            })
+            newFeedList = newFeedList.concat(self.data.feedList)
           }
+          newFeedList = newFeedList.concat(feeds)
+          // newFeedList.push({fid:-1}) // 每一页末尾插入一条广告
+          const newFeedPage = self.data.feedPage + 1
+          self.setData({
+            feedPage: newFeedPage,
+            feedList: newFeedList
+          })
+        } else {
+          // 标记不能加载更多了
+          self.data.canLoadMore = false
+          wx.showToast({
+            icon: 'none',
+            title: '总共有 ' + self.data.feedList.length + ' 条小集，没有更多了'
+          })
         }
       },
       fail: function (errMsg) {
@@ -172,10 +173,7 @@ Page({
     const formId = event.detail.formId
     if (formId) {
       console.log(formId)
-      wx.showToast({
-        title: formId,
-        icon: 'none',
-      })
+      app.push.subscribe(formId)
     }
   }
 

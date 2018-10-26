@@ -73,18 +73,16 @@ Page({
       },
       success: function (result) {
         console.log('Feed detail request success', result)
-        if (result.data.code == 0) { // 接口请求成功
-          const feed = result.data.data.feed
-          if (feed) {
-            self.setData({
-              feed: feed
-            })
-            self.feedConetntRendering()
-            return
-          }
+        const feed = result.data.feed
+        if (feed) {
+          self.setData({
+            feed: feed
+          })
+          self.feedConetntRendering()
+        } else {
+          self.feedNotFoundError()
+          wx.hideLoading()
         }
-        self.feedNotFoundError()
-        wx.hideLoading()
       },
       fail: function (errMsg) {
         console.log('Feed detail request fail', errMsg)
@@ -190,27 +188,15 @@ Page({
       success: function (result) {
         console.log('Feed favor request success', result)
         wx.hideLoading()
-        if (result.data.code == 0) {
-          wx.showToast({
-            icon: 'success',
-            title: favorValue == 0 ? '取消收藏成功' : '收藏成功'
-          })
-          const favorTitleValue = favorValue == 0 ? '收藏' : '取消收藏'
-          self.data.feed.favor = favorValue
-          self.setData({
-            favorTitle: favorTitleValue
-          })
-        } else if (result.data.code == -1) {
-          // 登录失效，重新登录
-          app.reLoginThenCallback(function () {
-            self.favorButtonClick()
-          })
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '收藏失败，请稍后重试'
-          })
-        }
+        wx.showToast({
+          icon: 'success',
+          title: favorValue == 0 ? '取消收藏成功' : '收藏成功'
+        })
+        const favorTitleValue = favorValue == 0 ? '收藏' : '取消收藏'
+        self.data.feed.favor = favorValue
+        self.setData({
+          favorTitle: favorTitleValue
+        })
       },
       fail: function (errMsg) {
         console.log('Feed favor request fail', errMsg)

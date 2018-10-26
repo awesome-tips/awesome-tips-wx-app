@@ -100,13 +100,11 @@ Page({
       },
       success: function (result) {
         console.log('Search request success', result)
-        if (result.data.code == 0) { // 接口请求成功
-          const feeds = result.data.data.feeds
-          if (feeds && feeds.length > 0) { // 如果有返回数据
-            self.setData({
-              feedList: feeds,
-            })
-          }
+        const feeds = result.data.feeds
+        if (feeds && feeds.length > 0) { // 如果有返回数据
+          self.setData({
+            feedList: feeds,
+          })
         }
       },
       fail: function (errMsg) {

@@ -70,29 +70,27 @@ Page({
       },
       success: function (result) {
         console.log('Filter list request success', result)
-        if (result.data.code == 0) {
-          let feeds = result.data.data.feeds
-          if (feeds && feeds.length > 0) {
-            let newFeedList = []
-            if (self.data.feedPage == 1) {
+        let feeds = result.data.feeds
+        if (feeds && feeds.length > 0) {
+          let newFeedList = []
+          if (self.data.feedPage == 1) {
 
-            } else {
-              newFeedList = newFeedList.concat(self.data.feedList)
-            }
-            newFeedList = newFeedList.concat(feeds)
-            const newFeedPage = self.data.feedPage + 1
-            self.setData({
-              feedPage: newFeedPage,
-              feedList: newFeedList
-            })
           } else {
-            // 标记不能加载更多了
-            self.data.canLoadMore = false
-            wx.showToast({
-              icon: 'none',
-              title: '没有更多了'
-            })
+            newFeedList = newFeedList.concat(self.data.feedList)
           }
+          newFeedList = newFeedList.concat(feeds)
+          const newFeedPage = self.data.feedPage + 1
+          self.setData({
+            feedPage: newFeedPage,
+            feedList: newFeedList
+          })
+        } else {
+          // 标记不能加载更多了
+          self.data.canLoadMore = false
+          wx.showToast({
+            icon: 'none',
+            title: '没有更多了'
+          })
         }
       },
       fail: function (errMsg) {

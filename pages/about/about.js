@@ -70,17 +70,15 @@ Page({
       },
       success: function (result) {
         console.log('About Content request success', result)
-        if (result.data.code == 0) { // 接口请求成功
-          const feed = result.data.data.feed
-          if (feed) {
-            self.setData({
-              feed: feed
-            })
-            self.feedConetntRendering()
-            return
-          }
+        const feed = result.data.feed
+        if (feed) {
+          self.setData({
+            feed: feed
+          })
+          self.feedConetntRendering()
+        } else {
+          wx.hideLoading()
         }
-        wx.hideLoading()
       },
       fail: function (errMsg) {
         console.log('About Content request fail', errMsg)

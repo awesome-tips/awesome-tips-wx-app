@@ -24,6 +24,8 @@ const config = {
   discoverIndexUrl:   `${apiHost}/discover/index`,
   // 订阅小集操作
   pushOpenWxUrl:      `${apiHost}/push/openWx`,
+  // 上传订阅推送的 formIds
+  pushUploadFormIdsUrl: `${apiHost}/push/uploadFormIds`,
 }
 
 module.exports = config

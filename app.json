@@ -5,6 +5,7 @@
     "pages/search/search",
     "pages/mine/mine",
     "pages/favorites/favorites",
+    "pages/subscribe/subscribe",
     "pages/about/about",
     "pages/discover/discover",
     "pages/filter/filter"

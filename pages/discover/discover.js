@@ -52,25 +52,23 @@ Page({
       url: app.URL.discoverIndexUrl,
       success: function (result) {
         console.log('Discover data request success', result)
-        if (result.data.code == 0) {
-          let topButton = result.data.data.topButton
-          if (topButton) {
-            self.setData({
-              topButton: topButton
-            })
-            wx.setStorage({
-              key: 'discover-topButton',
-              data: topButton
-            })
-          }
-          let dataList = result.data.data.dataList
-          if (dataList && dataList.length > 0) {
-            self.setDataList(dataList)
-          }
+        let topButton = result.data.topButton
+        if (topButton) {
           self.setData({
-            pageHide: false
+            topButton: topButton
+          })
+          wx.setStorage({
+            key: 'discover-topButton',
+            data: topButton
           })
         }
+        let dataList = result.data.dataList
+        if (dataList && dataList.length > 0) {
+          self.setDataList(dataList)
+        }
+        self.setData({
+          pageHide: false
+        })
       },
       fail: function (errMsg) {
         console.log('Discover data request fail', errMsg)

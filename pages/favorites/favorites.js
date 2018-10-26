@@ -119,36 +119,29 @@ Page({
       },
       success: function (result) {
         console.log('Feed favor list request success', result)
-        if (result.data.code == 0) { // 接口请求成功
-          const feeds = result.data.data.feeds
-          if (feeds && feeds.length > 0) { // 如果有返回数据
-            const newFeedPage = self.data.feedPage + 1
-            let newFeedList = []
-            if (self.data.feedPage > 1) {
-              newFeedList = newFeedList.concat(self.data.feedList)
-            }
-            newFeedList = newFeedList.concat(feeds)
+        const feeds = result.data.feeds
+        if (feeds && feeds.length > 0) { // 如果有返回数据
+          const newFeedPage = self.data.feedPage + 1
+          let newFeedList = []
+          if (self.data.feedPage > 1) {
+            newFeedList = newFeedList.concat(self.data.feedList)
+          }
+          newFeedList = newFeedList.concat(feeds)
+          self.setData({
+            feedPage: newFeedPage,
+            feedList: newFeedList
+          })
+        } else {
+          // 标记不能加载更多了
+          if (self.data.feedPage == 1) {
             self.setData({
-              feedPage: newFeedPage,
-              feedList: newFeedList
-            })
-          } else {
-            // 标记不能加载更多了
-            if (self.data.feedPage == 1) {
-              self.setData({
-                feedList: []
-              })
-            }
-            self.data.canLoadMore = false
-            wx.showToast({
-              icon: 'none',
-              title: '总共收藏了 ' + self.data.feedList.length + ' 条小集'
+              feedList: []
             })
           }
-        } else if (result.data.code == -1) {
-          // 登录失效，重新登录
-          app.reLoginThenCallback(function () {
-            self.getFeedFavorList()
+          self.data.canLoadMore = false
+          wx.showToast({
+            icon: 'none',
+            title: '总共收藏了 ' + self.data.feedList.length + ' 条小集'
           })
         }
       },
