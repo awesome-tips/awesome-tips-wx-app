@@ -93,7 +93,10 @@ App({
     const self = this
     try {
       const res = wx.getSystemInfoSync()
-      if (res.model.search('iPhone X') != -1) {
+      if (res.screenHeight == 812.0 || res.screenHeight == 896.0) {
+        // iPhone X/XS:     375pt * 812pt (@3x)
+        // iPhone XS Max:   414pt * 896pt (@3x)
+        // iPhone XR:       414pt * 896pt (@2x)
         self.globalData.isIPX = true
       }
     } catch (e) {
@@ -223,21 +226,19 @@ App({
   getWXUserInfo: function () {
     const self = this
 
-    // NOTE: 过渡期，这里暂时直接调 wx.getUserInfo 获取用户信息（开发版和体验版不起效），以便用户一进入就直接弹窗获取用户信息
-    
     // 判断用户是否授权过获取用户信息
-    // wx.getSetting({
-    //   success: function (res) {
-    //     if (res.authSetting['scope.userInfo']) {
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: function (res) {
               self.updateWXUserInfo(res.userInfo)
             }
           })
-        // }
-      // }
-    // })
+        }
+      }
+    })
   },
 
   // 更新当前用户的微信信息

@@ -1,0 +1,19 @@
+<view class="feed-list">
+  <block wx:for-items="{{feedList}}" wx:key="{{item.fid}}">
+    <view wx:if="{{item.fid == -1}}" class="ad-item">
+      <ad unit-id="adunit-643e6c06be88b2c5"></ad>
+    </view>
+    <view wx:else class="item" hover-class="item-hover">
+      <form bindsubmit="itemClickSubmit" report-submit="true">
+        <button class="button" formType="submit" id="{{item.fid}}">
+          <view class="title">
+            <view class="text">{{item.title}}</view>
+          </view>
+          <view class="subtitle">
+            <view class="text">{{item.postdate}} @{{item.author}}</view>
+          </view>
+        </button>
+      </form>
+    </view>
+  </block>
+</view>

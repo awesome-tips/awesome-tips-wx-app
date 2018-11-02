@@ -1,5 +1,3 @@
-<import src="/utils/feed.wxml"/>
-
 <view class="head">
   <form bindsubmit="subscribeSubmit" report-submit="true">
     <button class="top-button" hover-class="top-button-hover" formType="submit">订阅小集</button>
@@ -7,7 +5,7 @@
 </view>
 
 <view class="body">
-  <template is="feed-template" data="{{feedList}}"/>
+  <feeds feedList="{{feedList}}"></feeds>
 </view>
 
 <view class="bottom" wx:if="{{showBottomLoading}}">

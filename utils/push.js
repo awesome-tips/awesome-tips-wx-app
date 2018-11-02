@@ -6,12 +6,16 @@ const PUSH = {
   formIds: [], // 暂存收集的推送 formIds
   uploading: false, // 是否正在上传 formIds
 
-  subscribe: function (formId) {
-    const self = this
-    const app = getApp()
+  addFormId: function (formId) {
     if (formId && formId != 'the formId is a mock one') {
-      self.formIds.push(formId)
+      this.formIds.push(formId)
     }
+  },
+
+  subscribe: function (formId) {
+    const app = getApp()
+    this.addFormId(formId)
+
     let isOpenPush = wx.getStorageSync('push')
     if (isOpenPush) {
       wx.showToast({
@@ -47,11 +51,9 @@ const PUSH = {
   },
 
   unsubscribe: function (formId) {
-    const self = this
     const app = getApp()
-    if (formId && formId != 'the formId is a mock one') {
-      self.formIds.push(formId)
-    }
+    this.addFormId(formId)
+
     let isOpenPush = wx.getStorageSync('push')
     if (isOpenPush) {
       // 提交取消订阅小集
@@ -87,25 +89,25 @@ const PUSH = {
   },
 
   uploadFormIds: function () {
-    const self = this
     const app = getApp()
     if (!app.globalData.hasLogined) {
       return
     }
 
-    if (self.uploading) {
+    if (this.uploading) {
       return
     }
 
-    if (self.formIds.length == 0) {
+    if (this.formIds.length == 0) {
       return
     }
 
     let fIds = [].concat(self.formIds)
-    self.formIds = []
+    this.formIds = []
 
-    self.uploading = true
+    this.uploading = true
 
+    const self = this
     app.HTTP.POST({
       url: app.URL.pushUploadFormIdsUrl,
       data: {

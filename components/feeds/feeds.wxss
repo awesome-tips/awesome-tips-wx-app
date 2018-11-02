@@ -4,9 +4,8 @@
 
 .feed-list .item {
   margin: 25rpx 0;
-  background-color: #fffefc;
-  border-radius: 6rpx;
   overflow: hidden;
+  border-radius: 6rpx;
   border: 1rpx solid rgba(13,25,40,0.25);
   box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }
@@ -25,19 +24,26 @@
   transition: all 200ms;
 }
 
-.feed-list .item .title {
+.feed-list .item .button {
+  padding: 0;
+  text-align: left;
+  line-height: 44rpx;
+  background-color: #fffefc;
+}
+
+.feed-list .item .button .title {
   padding: 45rpx 30rpx;
   display: flex;
   align-items: center;
   transition: opacity .3s;
 }
 
-.feed-list .item .title .text {
+.feed-list .item .button .title .text {
   color: #515151;
   font-size: 32rpx;
 }
 
-.feed-list .item .subtitle {
+.feed-list .item .button .subtitle {
   padding: 10rpx 30rpx;
   display: flex;
   align-items: center;
@@ -45,7 +51,7 @@
   background-color: #f9f9f9;
 }
 
-.feed-list .item .subtitle .text {
+.feed-list .item .button .subtitle .text {
   color: #bfbfbf;
   font-size: 22rpx;
 }

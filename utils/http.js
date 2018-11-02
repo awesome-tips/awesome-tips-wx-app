@@ -71,6 +71,7 @@ const HTTP = {
   },
 
   processSuccessRes: function (request, res) {
+    const app = getApp()
     let responseObj = res.data
     if (typeof (responseObj) == 'object') {
       if (responseObj.code == 0) {

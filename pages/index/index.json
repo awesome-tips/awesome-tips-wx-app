@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "知识小集",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "feeds": "/components/feeds/feeds"
+  }
 }
