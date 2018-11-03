@@ -1,6 +1,7 @@
 <view class="head">
   <form bindsubmit="subscribeSubmit" report-submit="true">
-    <button class="top-button" hover-class="top-button-hover" formType="submit">订阅小集</button>
+    <button wx:if="{{loginError}}" class="top-button" hover-class="top-button-hover" bindtap="reLoginButtonClick">重试一下</button>
+    <button wx:if="{{!loginError && feedList.length > 0}}" class="top-button" hover-class="top-button-hover" formType="submit">订阅小集</button>
   </form>
 </view>
 

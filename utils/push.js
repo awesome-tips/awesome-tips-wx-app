@@ -102,7 +102,7 @@ const PUSH = {
       return
     }
 
-    let fIds = [].concat(self.formIds)
+    let fIds = [].concat(this.formIds)
     this.formIds = []
 
     this.uploading = true

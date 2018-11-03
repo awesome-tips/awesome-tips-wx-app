@@ -73,6 +73,7 @@ App({
   // 小程序隐藏
   onHide: function () {
     console.log('App On Hide')
+    // 关闭小程序时，上传收集的 formIds，用于订阅推送
     this.push.uploadFormIds()
   },
 
@@ -128,7 +129,6 @@ App({
       wx.checkSession({
         success: function () {
           // 服务端 session_key 未过期，并且在本生命周期一直有效
-          self.HTTP.token = token
           self.globalData.token = token
           self.globalData.openId = openId
           self.globalData.hasLogined = true
@@ -267,10 +267,10 @@ App({
           gender: wxUserInfo.gender,
         },
         success: function (res) {
-          console.log('用户信息更新成功')
+          console.log('微信用户信息更新成功:', res)
         },
         fail: function (err) {
-          console.log('用户信息更新失败:', err)
+          console.log('微信用户信息更新失败:', err)
         }
       })
     }

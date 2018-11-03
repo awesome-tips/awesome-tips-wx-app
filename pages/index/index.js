@@ -10,6 +10,7 @@ Page({
     showBottomLoading: false, // 是否显示底部加载视图
     feedPage: 1,  // 列表页数
     feedList: [], // 列表数据
+    loginError: false, // 标识登录失败，显示重试按钮
   },
 
   // 页面初始化
@@ -17,21 +18,66 @@ Page({
     const self = this
 
     app.mta.Page.init()
-    wx.showNavigationBarLoading()
 
     if (app.globalData.hasLogined) {
-      // 已登录
+      // 已登录，请求列表数据
+      wx.showLoading({
+        mask: true
+      })
       self.getFeedList()
     } else {
-      // 未登录延迟加载
+      if (app.globalData.loginError) {
+        // 登录已失败，显示错误页面
+        self.showLoginErrorPage()
+      } else {
+        // 正在登录中
+        wx.showLoading({
+          mask: true
+        })
+      }
+      // 设置登录成功回调
       app.addLoginReadyCallback(function () {
+        // 请求列表数据
         self.getFeedList()
       })
+      // 设置登录失败回调
+      app.loginFailCallback = function () {
+        wx.hideLoading()
+        self.showLoginErrorPage()
+      }
     }
+  },
+
+  // 显示登录错误页面
+  showLoginErrorPage: function () {
+    this.setData({
+      loginError: true
+    })
+    wx.showToast({
+      icon: 'none',
+      title: '登录失败，请稍后重试',
+    })
+  },
+
+  // 登录按钮重试
+  reLoginButtonClick: function () {
+    this.setData({
+      loginError: false
+    })
+    wx.showLoading({
+      mask: true,
+    })
+    app.doWXUserLogin()
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    if (this.data.loginError) {
+      // 登录失败
+      wx.stopPullDownRefresh()
+      return
+    }
+
     if (this.data.loading) {
       // 正在加载中，直接返回
       return
@@ -45,6 +91,11 @@ Page({
 
   // 底部加载
   onReachBottom: function () {
+    if (this.data.loginError) {
+      // 登录失败
+      return
+    }
+
     if (this.data.loading || !this.data.canLoadMore || this.data.feedList.length == 0) {
       // 正在加载中，或不能加载更多，或者列表数据为空，则直接返回
       return
@@ -91,6 +142,7 @@ Page({
         },
         success: function (result) {
           console.log('Feed list request success:', result)
+          wx.hideLoading()
           let feeds = result.data.feeds
           if (feeds && feeds.length > 0) { // 如果有返回数据
             let newFeedList = []
@@ -117,6 +169,11 @@ Page({
         },
         fail: function (errMsg) {
           console.log('Feed list request fail:', errMsg)
+          wx.hideLoading()
+          wx.showToast({
+            icon: 'none',
+            title: '获取失败，请稍后下拉重试',
+          })
         },
         complete: function () {
           // 标记加载结束
@@ -127,9 +184,8 @@ Page({
     }, 1000)
   },
 
-  // 关闭相关 Loading 视图
+  // 关闭下拉刷新或者底部加载 Loading 视图
   closeLoadingView: function () {
-    wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
     if (this.data.showBottomLoading) {
       this.setData({
