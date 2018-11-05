@@ -1,35 +1,34 @@
-<view>
-  <view class="page-head">
-    <button wx:if="{{!hasUserInfo}}" class="page-top-button" hover-class="page-top-button-hover" open-type="getUserInfo" bindgetuserinfo="getUserInfo">关联微信</button>
-    <view wx:else class="userinfo">
-      <block>
-        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+<view class="head">
+  <button wx:if="{{!wxUserInfo}}" class="top-button" hover-class="top-button-hover" open-type="getUserInfo" bindgetuserinfo="getWXUserInfo">关联微信</button>
+  <view wx:else class="userinfo">
+    <block>
+      <image class="avatar" src="{{wxUserInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="nickname">{{wxUserInfo.nickName}}</text>
+    </block>
+  </view>
+</view>
+
+<view class="body">
+  <view class="mine-list">
+    <!-- 我的页列表项 -->
+    <block wx:for-items="{{dataList}}" wx:key="{{item.id}}">
+      <view class="item" hover-class="item-hover" bindtap="{{item.clickEnvet}}">
+        <view class="title">
+          <text class="text">{{item.title}}</text>
+        </view>
+      </view>
+    </block>
+    <!-- 意见反馈按钮 -->
+    <view class="item" hover-class="item-hover">
+      <button class="feedback-button" open-type="feedback">意见反馈</button>
     </view>
   </view>
-  <view class="page-body">
-    <view class="mine-list">
-      <!-- 我的页列表项 -->
-      <block wx:for-items="{{dataList}}" wx:key="{{item.id}}">
-        <view class="mine-list-item" hover-class="item-hover" bindtap="{{item.clickEnvet}}">
-          <view class="mine-list-item-title-area">
-            <text class="mine-list-item-title-text">{{item.title}}</text>
-          </view>
-        </view>
-      </block>
-      <!-- 意见反馈按钮 -->
-      <view class="mine-list-item" hover-class="item-hover">
-        <button class="mine-feedback-button" open-type="feedback">意见反馈</button>
-      </view>
-    </view>
-    <!-- 广告暂时不展示 -->
-    <!-- <view class="ad-view-item">
-      <ad unit-id="adunit-96607f318ecbc09c"></ad>
-    </view> -->
-    <!-- 底部显示版本号 -->
-    <view class="mine-app-version-area">
-      <text class="mine-app-version-text">v{{appVersion}}</text>
-    </view>
+  <!-- 广告暂时不展示 -->
+  <!-- <view class="ad-view-item">
+    <ad unit-id="adunit-96607f318ecbc09c"></ad>
+  </view> -->
+  <!-- 底部显示版本号 -->
+  <view class="mine-app-version">
+    <text class="text">v{{appVersion}}</text>
   </view>
 </view>

@@ -1,34 +1,17 @@
-@import "../../utils/common.wxss";
-
-.page-head {
-  padding: 0;
-  margin: 22rpx 40rpx;
-}
-
-.page-top-button {
-  width: 304rpx;
-  height: 84rpx;
-  border-radius: 42rpx;
-}
-
-.page-top-button::after {
-  border: none;
-}
-
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.userinfo-avatar {
+.userinfo .avatar {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
-.userinfo-nickname {
+.userinfo .nickname {
   color: #bfbfbf;
 }
 
@@ -36,7 +19,7 @@
   display: block;
 }
 
-.mine-list-item {
+.mine-list .item {
   margin: 25rpx 0;
   background-color: #fffefc;
   border-radius: 6rpx;
@@ -44,44 +27,44 @@
   border: 1rpx solid rgba(13,25,40,0.25);
   box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }
-.mine-list-item:first-child {
+.mine-list .item:first-child {
   margin-top: 0;
 }
-.mine-list-item:last-child {
+.mine-list .item:last-child {
   margin-bottom: 0;
 }
-.mine-list-item.item-hover {
-    box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
-    transform: scale(.95);
-    transition: all 200ms;
+.mine-list .item-hover {
+  box-shadow: 0 2rpx 6rpx 0 rgba(44,57,75,0.15);
+  transform: scale(.95);
+  transition: all 200ms;
 }
 
-.mine-list-item-title-area {
+.mine-list .item .title {
   padding: 30rpx 30rpx;
   display: flex;
   align-items: center;
   transition: opacity .3s;
 }
 
-.mine-list-item-title-text {
+.mine-list .item .title .text {
   flex: 1;
   color: #515151;
   font-size: 32rpx;
 }
 
-.mine-app-version-area {
+.mine-app-version {
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 30rpx 30rpx;
 }
 
-.mine-app-version-text {
+.mine-app-version .text {
   color: #bfbfbf;
   font-size: 26rpx;
 }
 
-.mine-feedback-button {
+.feedback-button {
   font-size: 32rpx;
   line-height: 44rpx;
   color: #515151;
@@ -91,6 +74,6 @@
   padding: 30rpx;
 }
 
-.mine-feedback-button::after {
+.feedback-button::after {
   border: none;
 }

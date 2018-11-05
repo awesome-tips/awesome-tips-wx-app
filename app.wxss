@@ -47,3 +47,16 @@ page .bottom .loading {
 button::after {
   border: none;
 }
+
+.ad-view-item {
+  margin: 25rpx 0;
+  border-radius: 6rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
+}
+.ad-view-item:first-child {
+  margin-top: 0;
+}
+.ad-view-item:last-child {
+  margin-bottom: 0;
+}

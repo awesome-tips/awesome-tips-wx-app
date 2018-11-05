@@ -8,9 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    hasUserInfo: false,
     dataList: null,
+    wxUserInfo: null,
     appVersion: app.version
   },
 
@@ -19,18 +18,17 @@ Page({
    */
   onLoad: function (options) {
     app.mta.Page.init()
-    if (app.globalData.userInfo) {
+
+    if (app.globalData.wxUserInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        wxUserInfo: app.globalData.wxUserInfo
       })
     } else {
       // 由于 getUserInfo 是网络请求，可能会在当前页面的 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+      app.wxUserInfoReadyCallback = res => {
         this.setData({
-          userInfo: res,
-          hasUserInfo: true
+          wxUserInfo: res
         })
       }
     }
@@ -76,34 +74,57 @@ Page({
     })
   },
 
-  // 点击登录获取微信用户信息
-  getUserInfo: function (e) {
-    const userInfo = e.detail.userInfo
-    if (userInfo) {
-      app.updateUserInfo(userInfo)
+  // 点击关联获取微信用户信息
+  getWXUserInfo: function (e) {
+    const wxUserInfo = e.detail.userInfo
+    if (wxUserInfo) {
+      if (app.globalData.hasLogined) {
+        // 已登录
+        app.updateWXUserInfo(wxUserInfo)
+      } else {
+        // 未登录
+        app.addLoginReadyCallback(function () {
+          // 请求列表数据
+          app.updateWXUserInfo(wxUserInfo)
+        })
+        if (app.globalData.loginError) {
+          // 登录失败，重新登录
+          app.doWXUserLogin()
+        }
+      }
     } else {
       console.log(e.detail.errMsg)
+      wx.showToast({
+        icon: 'none',
+        title: '获取微信用户信息失败，请稍后重试！',
+      })
     }
   },
 
   // 点击我的收藏
   favorBtnClick: function (event) {
+    if (!app.globalData.hasLogined) {
+      return
+    }
     wx.navigateTo({
-      url: '../favorites/favorites'
+      url: '/pages/favorites/favorites'
     })
   },
 
   // 点击我的订阅
   subscribeBtnClick: function (event) {
+    if (!app.globalData.hasLogined) {
+      return
+    }
     wx.navigateTo({
-      url: '../subscribe/subscribe'
+      url: '/pages/subscribe/subscribe'
     })
   },
 
   // 点击关于我们
   aboutBtnClick: function (event) {
     wx.navigateTo({
-      url: '../about/about'
+      url: '/pages/about/about'
     })
   },
 
