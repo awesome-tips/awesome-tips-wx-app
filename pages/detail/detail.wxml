@@ -19,7 +19,7 @@
   <view class="bottom-view" style="height:{{isIPX ? 60+34 : 60}}px">
     <view class="container">
       <button id="0" class="button subscribe" hover-class="button-hover" formType="submit">订阅明天小集</button>
-      <button id="1" class="button favorites" hover-class="button-hover" formType="submit">{{favorTitle}}</button>
+      <button id="1" class="button favorites {{feed.platform != 0 ? 'disabled' : ''}}" hover-class="button-hover" formType="submit">{{favorTitle}}</button>
     </view>
   </view>
 </form>

@@ -100,7 +100,7 @@ Page({
         fid: self.data.fid,
       },
       success: function (result) {
-        console.log('Feed detail request success', result)
+        console.log('Feed detail request success:', result)
         const feed = result.data.feed
         if (feed) {
           self.setData({
@@ -113,7 +113,7 @@ Page({
         }
       },
       fail: function (errMsg) {
-        console.log('Feed detail request fail', errMsg)
+        console.log('Feed detail request fail:', errMsg)
         wx.hideLoading()
       },
       complete: function () {
@@ -212,6 +212,13 @@ Page({
       // 订阅小集
     } else if (btnId == 1) {
       // 收藏小集
+      if (this.data.feed.platform != 0) {
+        wx.showToast({
+          icon: 'none',
+          title: '文章类型不能收藏'
+        })
+        return
+      }
       this.submitFavor()
     } else if (btnId == 2) {
       // 跳转到首页
@@ -247,7 +254,7 @@ Page({
         favor: favorValue,
       },
       success: function (result) {
-        console.log('Feed favor request success', result)
+        console.log('Feed favor request success:', result)
         wx.hideLoading()
         wx.showToast({
           icon: 'success',
@@ -260,7 +267,7 @@ Page({
         })
       },
       fail: function (errMsg) {
-        console.log('Feed favor request fail', errMsg)
+        console.log('Feed favor request fail:', errMsg)
         wx.showToast({
           icon: 'none',
           title: errMsg

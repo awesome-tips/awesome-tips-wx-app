@@ -96,7 +96,7 @@ Page({
       console.log(e.detail.errMsg)
       wx.showToast({
         icon: 'none',
-        title: '获取微信用户信息失败，请稍后重试！',
+        title: '获取微信用户信息失败，请稍后重试',
       })
     }
   },
