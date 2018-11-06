@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "我的收藏",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "feeds": "/components/feeds/feeds"
+  }
 }

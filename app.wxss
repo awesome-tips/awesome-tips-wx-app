@@ -33,13 +33,17 @@ page .body {
   padding: 25rpx;
 }
 
-page .bottom {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 25rpx;
+page .body-IPX {
+  padding-bottom: 46px; /* 25rpx = 12px, 12px + 34px */
 }
 
-page .bottom .loading {
+page .body .bottom {
+  display: flex;
+  justify-content: center;
+  padding-top: 25rpx;
+}
+
+page .body .bottom .loading {
   width: 60rpx;
   height: 60rpx;
 }
@@ -48,15 +52,15 @@ button::after {
   border: none;
 }
 
-.ad-view-item {
+.ad-item {
   margin: 25rpx 0;
   border-radius: 6rpx;
   overflow: hidden;
   box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }
-.ad-view-item:first-child {
+.ad-item:first-child {
   margin-top: 0;
 }
-.ad-view-item:last-child {
+.ad-item:last-child {
   margin-bottom: 0;
 }

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "搜索小集"
+  "navigationBarTitleText": "搜索小集",
+  "usingComponents": {
+    "feeds": "/components/feeds/feeds"
+  }
 }

@@ -1,5 +1,5 @@
 <import src="/towxml/entry.wxml"/>
 
-<view wx:if="{{!pageHide}}" class="about-content-view">
+<view wx:if="{{!pageHide}}" class="{{isIPX ? 'container container-IPX' : 'container'}}">
   <template is="entry" data="{{...article}}"/>
 </view>

@@ -1,6 +1,4 @@
-@import "../../utils/common.wxss";
-
-.page-body {
+page .body {
   padding-top: 0;
 }
 

@@ -24,7 +24,7 @@
     </view>
   </view>
   <!-- 广告暂时不展示 -->
-  <!-- <view class="ad-view-item">
+  <!-- <view class="ad-item">
     <ad unit-id="adunit-96607f318ecbc09c"></ad>
   </view> -->
   <!-- 底部显示版本号 -->

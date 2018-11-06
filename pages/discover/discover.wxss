@@ -1,5 +1,4 @@
-@import "../../utils/font.wxss";
-@import "../../utils/common.wxss";
+@import "./DINPro.wxss";
 
 .home {
   overflow-x: hidden;
@@ -188,12 +187,12 @@
   width: 351rpx;
 }
 
-.home .ad-view-area {
+.home .ad-view {
   margin: 40rpx 42rpx;
   border-radius: 6rpx;
 }
 
-.home .ad-view-area .ad-view {
+.home .ad-view .ad-item {
   border-radius: 6rpx;
   box-shadow: 0 8rpx 20rpx 0 rgba(44,57,75,0.1);
 }

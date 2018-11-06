@@ -116,7 +116,15 @@ Page({
     }
     let content = feed.content
     if (!content || content.length == 0) {
-      content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看。'
+      if (feed.platform == 1) {
+        // 公众号文章
+        content = '我们的小程序暂时无法加载公众号文章，请复制原文链接后在浏览器中打开查看。\r\n\r\n你也可以关注我们的“知识小集”公众号获取更多文技术章。'
+      } else if (feed.platform == 3) {
+        // Medium 链接
+        content = '知识小集的英文版由 **@故胤道长** 维护并定期发布在 Medium 平台上。\r\n\r\n由于小程序暂时无法加载外链，请复制原文链接后在浏览器中打开查看，需要自行翻墙才能访问哦。'
+      } else {
+        content = '暂时无法加载该小集详情，请复制原文链接后在浏览器中打开查看。'
+      }
     }
     content = content + '\r\n\r\n[原文链接](' + feed.url + ')'
     

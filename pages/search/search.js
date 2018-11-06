@@ -10,7 +10,8 @@ Page({
   data: {
     keyword: null,
     loading: false,
-    feedList: []
+    feedList: [],
+    isIPX: app.globalData.isIPX,
   },
 
   /**
@@ -85,9 +86,7 @@ Page({
       feedList: []
     })
 
-    wx.showLoading({
-      icon: 'loading'
-    })
+    wx.showLoading()
 
     // 标记正在加载中
     self.data.loading = true
@@ -99,7 +98,7 @@ Page({
         filter: 'tips',
       },
       success: function (result) {
-        console.log('Search request success', result)
+        console.log('Search request success:', result)
         const feeds = result.data.feeds
         if (feeds && feeds.length > 0) { // 如果有返回数据
           self.setData({
@@ -108,12 +107,12 @@ Page({
         }
       },
       fail: function (errMsg) {
-        console.log('Search request fail', errMsg)
+        console.log('Search request fail:', errMsg)
       },
       complete: function () {
         // 标记搜索结束
-        self.data.loading = false
         wx.hideLoading()
+        self.data.loading = false
         if (self.data.feedList.length > 0) {
           wx.showToast({
             icon: 'none',
@@ -127,16 +126,6 @@ Page({
         }
       }
     })
-  },
-
-  // 列表项点击
-  feedItemClick: function (event) {
-    const feed = event.currentTarget.dataset.feed
-    if (feed && feed.fid) {
-      wx.navigateTo({
-        url: '../detail/detail?fid=' + feed.fid
-      })
-    }
-  },
+  }
 
 })

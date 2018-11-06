@@ -1,9 +1,6 @@
-<import src="/utils/template.wxml"/>
-<view>
-  <view class="page-body">
-    <template is="feed-list-template" data="{{feedList}}"/>
-    <view class="bottom-loading-container" wx:if="{{showBottomLoading}}">
-      <image class="bottom-loading-image" mode="aspectFit" src="/assets/loading.gif"></image>
-    </view>
+<view class="{{isIPX ? 'body body-IPX' : 'body'}}">
+  <feeds feedList="{{feedList}}"></feeds>
+  <view class="bottom" wx:if="{{showBottomLoading}}">
+    <image class="loading" mode="aspectFit" src="/assets/loading.gif"></image>
   </view>
 </view>

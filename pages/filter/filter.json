@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "feeds": "/components/feeds/feeds"
+  }
 }

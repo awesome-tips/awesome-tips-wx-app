@@ -1,13 +1,17 @@
 @import '/towxml/style/main.wxss';
 @import '/towxml/style/theme/light.wxss';
 
+.container {
+  background-color: #FFFFFF;
+  padding-bottom: 0;
+}
+
+.container-IPX {
+  padding-bottom: 34px;
+}
+
 .h2w__main {
   margin: 0 30rpx;
   padding-top: 30rpx;
   padding-bottom: 30rpx;
-}
-
-.about-content-view {
-  background-color: #FFFFFF;
-  height: 100%;
 }

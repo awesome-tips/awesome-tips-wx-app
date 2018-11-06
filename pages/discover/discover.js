@@ -10,7 +10,6 @@ Page({
   data: {
     pageHide: true,
     loading: false,
-    topButton: null,
     dataList: [],
   },
 
@@ -23,11 +22,9 @@ Page({
 
     const self = this
 
-    let topButton = wx.getStorageSync('discover-topButton')
     let dataList = wx.getStorageSync('discover-dataList')
-    if (topButton && dataList) {
+    if (dataList) {
       self.setData({
-        topButton: topButton,
         dataList: dataList,
         pageHide: false
       })
@@ -51,17 +48,7 @@ Page({
     app.HTTP.GET({
       url: app.URL.discoverIndexUrl,
       success: function (result) {
-        console.log('Discover data request success', result)
-        let topButton = result.data.topButton
-        if (topButton) {
-          self.setData({
-            topButton: topButton
-          })
-          wx.setStorage({
-            key: 'discover-topButton',
-            data: topButton
-          })
-        }
+        console.log('Discover data request success:', result)
         let dataList = result.data.dataList
         if (dataList && dataList.length > 0) {
           self.setDataList(dataList)
@@ -71,7 +58,7 @@ Page({
         })
       },
       fail: function (errMsg) {
-        console.log('Discover data request fail', errMsg)
+        console.log('Discover data request fail:', errMsg)
       },
       complete: function () {
         self.data.loading = false
@@ -133,7 +120,7 @@ Page({
       if (item.type == 'filter') {
         if (item.filter && item.filter.length > 0) {
           wx.navigateTo({
-            url: '../filter/filter?filter=' + item.filter + '&title=' + item.name
+            url: '/pages/filter/filter?filter=' + item.filter + '&title=' + item.name
           })
         }
       } else if (item.type == 'page') {
@@ -151,11 +138,18 @@ Page({
       } else if (item.type == 'tips') {
         if (item.fid && item.fid.length > 0) {
           wx.navigateTo({
-            url: '../detail/detail?fid=' + item.fid
+            url: '/pages/detail/detail?fid=' + item.fid
           })
         }
       }
     }
+  },
+
+  // 点击搜索小集
+  searchBtnClick: function (event) {
+    wx.navigateTo({
+      url: '/pages/search/search'
+    })
   },
 
   /**
@@ -205,7 +199,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '发现知识小集',
-      path: 'pages/discover/discover?from=share',
+      path: '/pages/discover/discover?from=share',
       imageUrl: 'https://tips.kangzubin.com/share.jpg'
     }
   },

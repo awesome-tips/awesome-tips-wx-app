@@ -6,9 +6,10 @@
 </view>
 
 <view class="body">
+  <!-- 列表数据 -->
   <feeds feedList="{{feedList}}"></feeds>
-</view>
-
-<view class="bottom" wx:if="{{showBottomLoading}}">
-  <image class="loading" mode="aspectFit" src="/assets/loading.gif"></image>
+  <!-- 底部加载视图 -->
+  <view class="bottom" wx:if="{{showBottomLoading}}">
+    <image class="loading" mode="aspectFit" src="/assets/loading.gif"></image>
+  </view>
 </view>

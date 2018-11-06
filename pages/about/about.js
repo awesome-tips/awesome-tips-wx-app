@@ -8,10 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fid: 148,
+    fid: null,
     feed: null,
     loading: false,
     pageHide: true,
+    isIPX: app.globalData.isIPX,
     article: {}
   },
 
@@ -21,21 +22,22 @@ Page({
   onLoad: function (options) {
     app.mta.Page.init()
 
-    let title = '关于我们'
+    let str = null
     let tp = options.type
     if (tp && tp == 'more') {
+      str = '更多小集'
       this.data.fid = 269
-      title = '更多小集'
+    } else {
+      str = '关于我们'
+      this.data.fid = 148
     }
     wx.setNavigationBarTitle({
-      title: title,
+      title: str,
     })
 
-    wx.showLoading({
-      icon: 'loading'
-    })
+    wx.showLoading()
 
-    // 调接口加载小集详情（关于我们）
+    // 调接口加载小集详情（关于我们、更多小集）
     if (app.globalData.hasLogined) {
       // 已登录
       this.getFeedDetail()
@@ -69,19 +71,21 @@ Page({
         fid: self.data.fid,
       },
       success: function (result) {
-        console.log('About Content request success', result)
+        console.log('About Content request success:', result)
         const feed = result.data.feed
         if (feed) {
-          self.setData({
-            feed: feed
-          })
+          self.data.feed = feed
           self.feedConetntRendering()
         } else {
           wx.hideLoading()
         }
       },
       fail: function (errMsg) {
-        console.log('About Content request fail', errMsg)
+        console.log('About Content request fail:', errMsg)
+        wx.showToast({
+          icon: 'none',
+          title: '加载失败，请稍后重试',
+        })
         wx.hideLoading()
       },
       complete: function () {
@@ -93,8 +97,7 @@ Page({
 
   // 渲染 Markdown 内容
   feedConetntRendering: function () {
-    const self = this
-    const feed = self.data.feed
+    const feed = this.data.feed
     if (!feed) {
       wx.hideLoading()
       return
@@ -111,7 +114,7 @@ Page({
     }
 
     let articleData = app.render.toJson(content, contentType)
-    self.setData({
+    this.setData({
       article: articleData,
       pageHide: false
     })
