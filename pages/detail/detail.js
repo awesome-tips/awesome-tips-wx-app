@@ -15,7 +15,8 @@ Page({
     fromShare: false,
     favorTitle: '收藏',
     isIPX: app.globalData.isIPX,
-    article: {}
+    loginError: false, // 标识登录失败，显示重试按钮
+    article: {},
   },
 
   /**
@@ -31,24 +32,51 @@ Page({
     if (options.fid) {
       this.data.fid = options.fid
 
-      wx.showLoading({
-        icon: 'loading'
-      })
-
       // 调接口加载小集详情
       if (app.globalData.hasLogined) {
         // 已登录
+        wx.showLoading()
         this.getFeedDetail()
       } else {
-        // 未登录延迟加载
+        if (app.globalData.loginError) {
+          // 登录已失败，显示错误页面
+          this.showLoginErrorPage()
+        } else {
+          // 正在登录中
+          wx.showLoading()
+        }
         const self = this
-        app.addLoginReadyCallback(function(){
+        // 设置登录成功回调
+        app.addLoginReadyCallback(function () {
+          // 请求列表数据
           self.getFeedDetail()
         })
+        // 设置登录失败回调
+        app.loginFailCallback = function () {
+          wx.hideLoading()
+          self.showLoginErrorPage()
+        }
       }
     } else {
       this.feedNotFoundError()
     }
+  },
+
+  // 显示登录错误页面
+  showLoginErrorPage: function () {
+    this.setData({
+      hidePage: true,
+      loginError: true
+    })
+  },
+
+  // 登录按钮重试
+  reLoginButtonClick: function () {
+    this.setData({
+      loginError: false
+    })
+    wx.showLoading()
+    app.doWXUserLogin()
   },
 
   // 获取小集详情
@@ -158,7 +186,7 @@ Page({
     const self = this
     if (self.data.feed) {
       const title = self.data.feed.title
-      const path = 'pages/detail/detail?from=share&fid=' + self.data.feed.fid
+      const path = '/pages/detail/detail?from=share&fid=' + self.data.feed.fid
       return {
         title: title,
         path: path,
@@ -169,12 +197,37 @@ Page({
     }
   },
 
+  // 订阅点击
+  subscribeSubmit: function (event) {
+    const btnId = event.detail.target.id
+    const formId = event.detail.formId
+    if (formId) {
+      if (btnId == 0) {
+        app.push.subscribe(formId)
+      } else {
+        app.push.addFormId(formId)
+      }
+    }
+    if (btnId == 0) {
+      // 订阅小集
+    } else if (btnId == 1) {
+      // 收藏小集
+      this.submitFavor()
+    } else if (btnId == 2) {
+      // 跳转到首页
+      wx.reLaunch({
+        url: "/pages/index/index"
+      });
+    }
+  },
+
   // 收藏按钮点击
-  favorButtonClick: function () {
+  submitFavor: function () {
     const self = this
+    
     if (!app.globalData.hasLogined) {
       app.reLoginThenCallback(function(){
-        self.favorButtonClick()
+        self.submitFavor()
       })
       return;
     }
@@ -225,12 +278,5 @@ Page({
 
   // 文中图片点击，浏览大图
   onImageTap: app.util.onImageTap,
-
-  // 跳转到主页
-  onGoHome: function() {
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
-  }
 
 })

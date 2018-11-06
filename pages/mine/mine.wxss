@@ -40,7 +40,7 @@
 }
 
 .mine-list .item .title {
-  padding: 30rpx 30rpx;
+  padding: 30rpx;
   display: flex;
   align-items: center;
   transition: opacity .3s;

@@ -1,0 +1,12 @@
+<view class="{{isIPX ? 'body body-IPX' : 'body'}}">
+  <view class="mine-list">
+    <view class="item">
+      <view class="title">
+        <text class="text">小集更新推送</text>
+      </view>
+      <view class="right">
+        <switch class="switch" checked="{{isOpenPush}}" bindchange="switchChange"/>
+      </view>
+    </view>
+  </view>
+</view>

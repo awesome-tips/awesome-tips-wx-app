@@ -1,0 +1,19 @@
+@import '../mine/mine.wxss';
+
+.mine-list .item {
+  display: flex;
+  align-items: center;
+}
+
+.mine-list .item .title {
+  width: 60%;
+}
+
+.mine-list .item .right {
+  width: 40%;
+  padding-right: 25rpx;
+}
+
+.mine-list .item .right .switch {
+  float: right;
+}

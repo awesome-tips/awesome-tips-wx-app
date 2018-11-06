@@ -1,23 +1,36 @@
 <import src="/towxml/entry.wxml"/>
 
-<view wx:if="{{!pageHide}}" class="feed-content-view">
+<view wx:if="{{!pageHide}}" class="content-view">
   <view class="h2w h2w-light">
     <view class="h2w__title">
-      <view class="feed-title-view">{{feed.title}}</view>
-      <view class="feed-date-auther-view">{{feed.postdate}} @{{feed.author}}</view>
+      <view class="feed-title">{{feed.title}}</view>
+      <view class="feed-date-auther">{{feed.postdate}} @{{feed.author}}</view>
     </view>
   </view>
+
   <template is="entry" data="{{...article}}"/>
-  <view class="{{isIPX ? 'detail-ad-view detail-ad-view-IPX' : 'detail-ad-view'}}">
+
+  <view class="{{isIPX ? 'ad-view ad-view-IPX' : 'ad-view'}}">
     <ad unit-id="adunit-70656baced0a8d45"></ad>
   </view>
 </view>
 
-<button wx:if="{{!pageHide && fromShare}}" class="go-home-button" hover-class="go-home-button-shadow-hover" style="bottom:{{isIPX ? 98 : 64}}px;" bindtap="onGoHome">
-  <image src="/assets/icon_Index_HL.png"></image>
-</button>
+<form wx:if="{{!pageHide}}" bindsubmit="subscribeSubmit" report-submit="true">
+  <view class="bottom-view" style="height:{{isIPX ? 60+34 : 60}}px">
+    <view class="container">
+      <button id="0" class="button subscribe" hover-class="button-hover" formType="submit">订阅明天小集</button>
+      <button id="1" class="button favorites" hover-class="button-hover" formType="submit">{{favorTitle}}</button>
+    </view>
+  </view>
+</form>
 
-<view wx:if="{{!pageHide}}" class="{{isIPX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}">
-  <button class="feed-bottom-btn-view feed-btn-left" bindtap="favorButtonClick">{{favorTitle}}</button>
-  <button class="feed-bottom-btn-view feed-btn-right" open-type="share">转发</button>
+<form wx:if="{{!pageHide && fromShare}}" bindsubmit="subscribeSubmit" report-submit="true">
+  <button id="2" class="gohome-button" hover-class="gohome-button-hover" style="bottom:{{isIPX ? 75+34 : 75}}px" formType="submit">
+    <image src="/assets/icon_Index_HL.png"></image>
+  </button>
+</form>
+
+<!-- 登录失败错误页面 -->
+<view wx:if="{{hidePage && loginError}}" class="head">
+  <button class="top-button" hover-class="top-button-hover" bindtap="reLoginButtonClick">重试一下</button>
 </view>

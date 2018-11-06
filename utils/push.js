@@ -2,9 +2,15 @@
  * 小程序订阅推送管理
  */
 
+const pushCacheKey = 'tips_push'
+
 const PUSH = {
   formIds: [], // 暂存收集的推送 formIds
   uploading: false, // 是否正在上传 formIds
+
+  isOpenPush: function () {
+    return wx.getStorageSync(pushCacheKey)
+  },
 
   addFormId: function (formId) {
     if (formId && formId != 'the formId is a mock one') {
@@ -16,8 +22,7 @@ const PUSH = {
     const app = getApp()
     this.addFormId(formId)
 
-    let isOpenPush = wx.getStorageSync('push')
-    if (isOpenPush) {
+    if (this.isOpenPush()) {
       wx.showToast({
         title: '已订阅，小集更新时将自动推送给您',
         icon: 'none',
@@ -37,7 +42,7 @@ const PUSH = {
             icon: 'none',
             duration: 2000
           })
-          wx.setStorageSync('push', true)
+          wx.setStorageSync(pushCacheKey, true)
         },
         fail: function (err) {
           console.log('订阅小集失败:', err)
@@ -54,8 +59,7 @@ const PUSH = {
     const app = getApp()
     this.addFormId(formId)
 
-    let isOpenPush = wx.getStorageSync('push')
-    if (isOpenPush) {
+    if (this.isOpenPush()) {
       // 提交取消订阅小集
       app.HTTP.POST({
         url: app.URL.pushOpenWxUrl,
@@ -69,7 +73,7 @@ const PUSH = {
             icon: 'none',
             duration: 2000
           })
-          wx.setStorageSync('push', false)
+          wx.setStorageSync(pushCacheKey, false)
         },
         fail: function (err) {
           console.log('取消订阅小集失败:', err)
